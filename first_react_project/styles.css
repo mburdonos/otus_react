@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.7;
+    color: #fff;
+    background: 
+        radial-gradient(circle at 20% 30%, #4a5568 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, #764ba2 0%, transparent 50%),
+        linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    padding: 60px 40px;
+}
+
+.react-icon {
+    margin-bottom: 40px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.content {
+    font-size: 1.4rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-size: 3.2rem;
+    letter-spacing: -0.5px;
+    font-weight: 700;
+}
+
+p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 25px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.highlight {
+    font-size: 1.3rem;
+    background-color: rgba(66, 153, 225, 0.2);
+    padding: 15px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(66, 153, 225, 0.4);
+}
+
+a {
+    color: #60a5fa;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+a::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #60a5fa;
+    transition: width 0.3s ease;
+}
+
+a:hover {
+    color: #3b82f6;
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+strong {
+    color: #ffffff;
+    font-weight: 700;
+    background-color: rgba(66, 153, 225, 0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .container {
+        padding: 40px 20px;
+        border-radius: 20px;
+    }
+    
+    .content {
+        font-size: 1.2rem;
+    }
+    
+    h1 {
+        font-size: 2.6rem;
+    }
+    
+    .react-icon svg {
+        width: 56px;
+        height: 56px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        margin: 10px;
+        padding: 30px 15px;
+    }
+    
+    .content {
+        font-size: 1.1rem;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+}
