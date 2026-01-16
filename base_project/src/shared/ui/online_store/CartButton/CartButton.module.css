@@ -1,0 +1,43 @@
+.cartButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.addButton {
+  background-color: #1890ff;
+  color: white;
+}
+
+.addButton:hover {
+  background-color: #40a9ff;
+}
+
+.minusButton,
+.plusButton {
+  background-color: #f5f5f5;
+  color: #333;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.inputField {
+  width: 48px;
+  text-align: center;
+  padding: 4px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 14px;
+}

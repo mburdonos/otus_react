@@ -1,0 +1,46 @@
+.item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.content {
+  flex: 1;
+}
+
+.title {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.price {
+  font-size: 14px;
+  color: #1890ff;
+  font-weight: 700;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.removeButton:hover {
+  color: #d93636;
+}
