@@ -1,0 +1,20 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #324B70;
+}
+
+.main {
+  flex: 1;
+  padding: 24px;
+  margin-top: 0; /* Убираем лишний отступ */
+  background-color: #324B70;
+}
+
+/* Адаптивность: уменьшаем отступы на мобильных */
+@media (max-width: 768px) {
+  .main {
+    padding: 16px;
+  }
+}
