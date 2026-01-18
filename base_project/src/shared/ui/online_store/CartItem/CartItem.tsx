@@ -17,7 +17,7 @@ export const CartItem: React.FC<CartItemProps> = ({
   return (
     <div className={styles.item}>
       <img
-        src={imageUrl}
+        src={imageUrl ? imageUrl : 'not_found.jpg'}
         alt={title}
         className={styles.image}
       />

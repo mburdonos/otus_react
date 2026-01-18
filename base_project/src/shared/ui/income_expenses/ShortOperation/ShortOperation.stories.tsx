@@ -8,8 +8,9 @@ type Story = StoryObj<typeof ShortOperation>;
 export default {
   title: 'UI/income_expenses/ShortOperation',
   component: ShortOperation,
+  tags: ['autodocs'],
   argTypes: {
-    sum_operation: {
+    sum_operation: {  
       control: 'number',
       description: 'Сумма операции',
     },

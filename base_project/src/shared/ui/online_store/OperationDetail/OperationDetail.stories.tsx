@@ -42,7 +42,7 @@ export const Default: Story = {
       'Процессор A17 Pro, 6 ГБ ОЗУ, 256 ГБ памяти. Поддержка USB-C, Dynamic Island, iOS 17. ' +
       'Время работы батареи до 29 часов. Доступен в цветах: Natural Titanium, White Titanium, Blue Titanium.',
     price: 199990,
-    imageUrl: 'https://via.placeholder.com/600x300?text=iPhone+15+Pro+Max',
+    imageUrl: 'iphone_15.jpg',
   },
 };
 
@@ -67,6 +67,6 @@ export const LowPrice: Story = {
       'Удобный блокнот формата A5 с белой бумагой и твёрдой обложкой. ' +
       '100 листов, пружинный механизм, подходит для записей и эскизов.',
     price: 199,
-    imageUrl: 'https://via.placeholder.com/600x300?text=Notebook',
+    imageUrl: 'note.jpg',
   },
 };

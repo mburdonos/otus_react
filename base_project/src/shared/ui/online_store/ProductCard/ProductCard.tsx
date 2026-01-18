@@ -17,7 +17,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <div className={styles.card}>
       <img
-        src={imageUrl}
+        src={imageUrl ? imageUrl : 'not_found.jpg'}
         alt={title}
         className={styles.image}
       />

@@ -35,7 +35,7 @@ export const Default: Story = {
     description:
       'Мощный ноутбук для работы и учёбы. Процессор Intel Core i5, 8 ГБ ОЗУ, SSD 256 ГБ. Лёгкий и компактный.',
     price: 49990,
-    imageUrl: 'https://via.placeholder.com/300x180?text=Laptop',
+    imageUrl: '/lenovo.png',
   },
 };
 
@@ -45,7 +45,7 @@ export const WithLongDescription: Story = {
     description:
       'Флагманский смартфон с камерой 50 МП, процессором Snapdragon 8 Gen 2, 8 ГБ ОЗУ и 256 ГБ памяти. Поддержка 5G, защита IP68, экран 120 Гц. Идеально для фото и игр. Долговечная батарея, быстрая зарядка. Стильный дизайн, несколько цветовых вариантов.',
     price: 69990,
-    imageUrl: 'https://via.placeholder.com/300x180?text=Phone',
+    imageUrl: 'samsung_a23.jpeg',
   },
 };
 

@@ -38,7 +38,7 @@ export const Small: Story = {
     text: 'SM',
     className: 'small-logo',
   },
-  parameters: {
+    parameters: {
     css: `
       .small-logo {
         width: 40px;
@@ -54,10 +54,10 @@ export const Large: Story = {
     text: 'BIG',
     className: 'large-logo',
   },
-  parameters: {
+    parameters: {
     css: `
       .large-logo {
-        width: 80px;
+        width: 800px;
         height: 80px;
         font-size: 1.2rem;
       }

@@ -19,7 +19,7 @@ export const OperationDetail: React.FC<OperationDetailProps> = ({
   return (
     <div className={styles.container}>
       <img
-        src={imageUrl}
+        src={imageUrl ? imageUrl : 'not_found.jpg'}
         alt={title}
         className={styles.image}
       />

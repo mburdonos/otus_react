@@ -8,6 +8,7 @@ type Story = StoryObj<typeof FullOperationInfo>;
 export default {
   title: 'UI/income_expenses/FullOperationInfo',
   component: FullOperationInfo,
+  tags: ['autodocs'],
   argTypes: {
     sum_operation: {
       control: 'number',
