@@ -23,7 +23,6 @@ const ShortOperation: React.FC<ShortOperationProps> = ({
     sum_operation = 0,
     category = 'base category',
     description = 'base category description',
-    size= 'small',
     length_description = 30,
 }) => {
     return (
