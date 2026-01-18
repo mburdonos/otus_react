@@ -1,4 +1,3 @@
-import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import ShortOperation from './ShortOperation';
 import './ShortOperation.module.css';
@@ -42,15 +41,13 @@ export const Default: Story = {
     sum_operation: 1500,
     category: 'Продукты',
     description: 'Покупка в супермаркете на сумму 1500 рублей',
-    size: 'small',
     length_description: 30,
   },
 };
 
 export const BigSize: Story = {
   args: {
-    ...Default.args,
-    size: 'big',
+    ...Default.args
   },
 };
 
@@ -68,7 +65,6 @@ export const EmptyValues: Story = {
     sum_operation: 0,
     category: '',
     description: '',
-    size: 'small',
     length_description: 30,
   },
 };

@@ -1,4 +1,3 @@
-import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import FullOperationInfo from './FullOperationInfo';
 import './FullOperationInfo.module.css';
@@ -15,7 +14,7 @@ export default {
       description: 'Сумма операции (число)',
       defaultValue: 1500,
     },
-    category: {
+    category: { 
       control: 'text',
       description: 'Категория операции',
       defaultValue: 'Продукты',
