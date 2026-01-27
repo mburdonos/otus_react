@@ -9,13 +9,15 @@ interface HeaderProps {
   className?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ title, className }) => (
-  <header className={`${styles.header} ${className || ''}`}>
+const Header: React.FC<HeaderProps> = ({ title, className }) => {
+  return (
+  <header className={`${styles.header} ${className || ''} `}>
     <div className={styles.logoWrapper}>
       <Logo text="MYBRAND" />
     </div>
     <h1 className={styles.title}>{title}</h1>
+    
   </header>
-);
+)};
 
 export default Header;

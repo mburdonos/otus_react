@@ -1,3 +1,13 @@
+[data-theme='light'] {
+  --bg-primary: #ece8e8;    /* светлый фон */
+  --text-primary: #000000;  /* тёмный текст */
+}
+
+[data-theme='dark'] {
+  --bg-primary: #000000;    /* тёмный фон */
+  --text-primary: #ffffff;  /* светлый текст */
+}
+
 .header {
   position: sticky;
   top: 0;
@@ -7,7 +17,9 @@
   gap: 16px;
   width: 100%;
   padding: 12px 24px;
-  background-color: #647a9a;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  /* background-color: #647a9a; */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(10px);
 }
@@ -18,7 +30,7 @@
 
 .title {
   margin: 20px;
-  color: #ffffff;
+  /* color: #ffffff; */
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.2;
