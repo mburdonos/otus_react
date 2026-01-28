@@ -1,6 +1,6 @@
 // ThemeToggle.tsx
 import React from 'react';
-import { useTheme, ThemeProvider } from './ThemeProvider';
+import { useTheme, ThemeProvider } from '../../../../context/ThemeProvider';
 import styles from './ThemeToggle.module.css';
 
 export const ThemeToggle: React.FC = () => {

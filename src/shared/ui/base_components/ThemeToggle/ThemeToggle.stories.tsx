@@ -1,7 +1,7 @@
 // src/stories/ThemeToggle.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
 import { ThemeToggle } from './ThemeToggle';
-import { ThemeProvider } from './ThemeProvider';
+import { ThemeProvider } from '../../../../context/ThemeProvider';
 
 const meta: Meta<typeof ThemeToggle> = {
   title: 'UI/base_components/ThemeToggle',
