@@ -1,10 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Header from './Header';
+import { ThemeProvider } from '../../../../context/ThemeProvider';
 
 const meta: Meta<typeof Header> = {
   title: 'UI/base_components/Header',
   component: Header,
   tags: ['autodocs'],
+    decorators: [
+    (Story) => (
+      <ThemeProvider>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
   argTypes: {
     title: {
       control: 'text',
@@ -25,12 +33,26 @@ export const Default: Story = {
   args: {
     title: 'Главная страница',
   },
+    decorators: [
+    (Story) => (
+      <ThemeProvider>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
 };
 
 export const WithLongTitle: Story = {
   args: {
     title: 'Очень длинный заголовок страницы, который может переноситься',
   },
+    decorators: [
+    (Story) => (
+      <ThemeProvider>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
 };
 
 export const Compact: Story = {
@@ -38,6 +60,13 @@ export const Compact: Story = {
     title: 'Кратко',
     className: 'compact-header',
   },
+    decorators: [
+    (Story) => (
+      <ThemeProvider>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
   parameters: {
     css: `
       .compact-header {

@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from '../Logo/Logo';
 import styles from './Header.module.css';
+import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
 
 interface HeaderProps {
   /** Заголовок страницы, отображается рядом с логотипом */
@@ -16,6 +17,7 @@ const Header: React.FC<HeaderProps> = ({ title, className }) => {
       <Logo text="MYBRAND" />
     </div>
     <h1 className={styles.title}>{title}</h1>
+    <ThemeToggle />
     
   </header>
 )};

@@ -1,6 +1,6 @@
 // ThemeToggle.tsx
 import React from 'react';
-import { useTheme, ThemeProvider } from '../../../../context/ThemeProvider';
+import { useTheme } from '../../../../context/ThemeProvider';
 import styles from './ThemeToggle.module.css';
 
 export const ThemeToggle: React.FC = () => {
@@ -8,9 +8,6 @@ export const ThemeToggle: React.FC = () => {
 
   return (
     <>
-    {/* <ThemeProvider>
-    <div className={styles.content} data-theme={theme}>Текущая тема: {theme}</div>
-    </ThemeProvider> */}
     <button
       className={styles.toggleButton}
       data-theme={theme}

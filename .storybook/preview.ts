@@ -1,4 +1,13 @@
-import type { Preview } from '@storybook/react-vite'
+import type { Preview } from '@storybook/react-vite';
+import { ThemeProvider } from '../src/context/ThemeProvider';
+
+
+// Тип для контекста стори (стандартный для Storybook 7+)
+type StoryContext = {
+  args: Record<string, any>;
+  globals: Record<string, any>;
+  parameters: Record<string, any>;
+};
 
 const preview: Preview = {
   parameters: {
