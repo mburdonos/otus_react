@@ -1,4 +1,4 @@
-import{L as a}from"./Logo-BuBnv687.js";import"./jsx-runtime-u17CrQMm.js";import"./iframe-CdM7U4i8.js";import"./preload-helper-PPVm8Dsz.js";const l={title:"UI/base_components/Logo",component:a,tags:["autodocs"],argTypes:{text:{control:"text",description:'Текст внутри логотипа (по умолчанию "LOGO")'},className:{control:"text",description:"Дополнительный класс для кастомной стилизации"}}},e={args:{text:"MYBRAND"}},s={args:{text:"APP"}},r={args:{text:"SM",className:"small-logo"},parameters:{css:`
+import{L as a}from"./Logo-C0alvbh7.js";import"./jsx-runtime-u17CrQMm.js";import"./iframe-C3N5KnWD.js";import"./preload-helper-PPVm8Dsz.js";const l={title:"UI/base_components/Logo",component:a,tags:["autodocs"],argTypes:{text:{control:"text",description:'Текст внутри логотипа (по умолчанию "LOGO")'},className:{control:"text",description:"Дополнительный класс для кастомной стилизации"}}},e={args:{text:"MYBRAND"}},s={args:{text:"APP"}},r={args:{text:"SM",className:"small-logo"},parameters:{css:`
       .small-logo {
         width: 40px;
         height: 40px;
