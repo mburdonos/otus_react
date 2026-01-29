@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Header from './Header';
 import { ThemeProvider } from '../../../../context/ThemeProvider';
+import { LanguageProvider } from '../../../../context/LanguageContext';
 
 const meta: Meta<typeof Header> = {
   title: 'UI/base_components/Header',
@@ -9,7 +10,9 @@ const meta: Meta<typeof Header> = {
     decorators: [
     (Story) => (
       <ThemeProvider>
+        <LanguageProvider>
         <Story />
+        </LanguageProvider>
       </ThemeProvider>
     ),
   ],
@@ -31,12 +34,14 @@ type Story = StoryObj<typeof Header>;
 
 export const Default: Story = {
   args: {
-    title: 'Главная страница',
+    title: 'main_page',
   },
     decorators: [
     (Story) => (
       <ThemeProvider>
+        <LanguageProvider>
         <Story />
+        </LanguageProvider>
       </ThemeProvider>
     ),
   ],
@@ -44,12 +49,14 @@ export const Default: Story = {
 
 export const WithLongTitle: Story = {
   args: {
-    title: 'Очень длинный заголовок страницы, который может переноситься',
+    title: 'long_title',
   },
     decorators: [
     (Story) => (
       <ThemeProvider>
+        <LanguageProvider>
         <Story />
+        </LanguageProvider>
       </ThemeProvider>
     ),
   ],
@@ -57,13 +64,15 @@ export const WithLongTitle: Story = {
 
 export const Compact: Story = {
   args: {
-    title: 'Кратко',
+    title: 'short_title',
     className: 'compact-header',
   },
     decorators: [
     (Story) => (
       <ThemeProvider>
+        <LanguageProvider>
         <Story />
+        </LanguageProvider>
       </ThemeProvider>
     ),
   ],
