@@ -1,14 +1,16 @@
 import React from 'react';
 import styles from './ProductCard.module.css';
 
-interface ProductCardProps {
+export interface ProductCardProps {
+  id: number,
   title: string;
   description: string;
   price: number;
   imageUrl: string;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({
+const ProductCard: React.FC<ProductCardProps> = ({
+  id,
   title,
   description,
   price,
@@ -36,3 +38,5 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 };
 
 ProductCard.displayName = 'ProductCard';
+
+export default ProductCard
