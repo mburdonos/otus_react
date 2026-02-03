@@ -1,51 +1,40 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 import ProductList from './ProductList';
-import { Product } from './types';
+import type { Meta, StoryObj } from '@storybook/react';
+
+export default {
+  title: 'UI/online_store/ProductList',
+  component: ProductList,
+  args: {
+    itemsPerLoad: 3,
+  },
+} as Meta<typeof ProductList>;
 
 type Story = StoryObj<typeof ProductList>;
 
-const meta: Meta<typeof ProductList> = {
-  title: 'UI/online_store/ProductList',
-  component: ProductList,
-  tags: ['autodocs'],
-  argTypes: {
-    products: {
-      control: { type: 'object' },
-    },
-  },
-};
-
-export default meta;
-
 export const Default: Story = {
-  args: {
-    products: [
-      {
-        id: '1',
-        name: 'Ноутбук Lenovo IdeaPad',
-        price: 49990,
-        description: '15.6", Intel Core i5, 8GB RAM, 256GB SSD',
-        inStock: true,
-      },
-      {
-        id: '2',
-        name: 'Мышь Logitech G502',
-        price: 3990,
-        description: 'Игровая, 11 кнопок, RGB-подсветка',
-        inStock: false,
-      },
-      {
-        id: '3',
-        name: 'Клавиатура Razer BlackWidow',
-        price: 8990,
-        inStock: true,
-      },
-    ],
-  },
+args : {
+  initialProducts: [
+    {
+      id: 1,
+      title: 'Тестовый товар 1',
+      description: 'Описание тестового товара 1',
+      price: 1000,
+      imageUrl: '/iphone_15.jpg',
+    },
+    {
+      id: 2,
+      title: 'Тестовый товар 2',
+      description: 'Описание тестового товара 2',
+      price: 2000,
+      imageUrl: '/lenovo.png',
+    },
+  ],
+}
 };
 
 export const Empty: Story = {
-  args: {
-    products: [],
-  },
+args : {
+  initialProducts: [],
+}
 };

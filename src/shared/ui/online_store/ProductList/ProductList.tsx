@@ -1,37 +1,66 @@
-import React from 'react';
-import styles from './ProductList.module.css';
-import { Product } from './types';
+import React, { useEffect, useState, useRef } from 'react';
+import ProductCard from '../ProductCard/ProductCard';
+import type { ProductCardProps } from '../ProductCard/ProductCard';
+import { generateRandomProduct } from '../../../../utils/generateRandomProduct';
 
 interface ProductListProps {
-  products: Product[];
+  initialProducts?: ProductCardProps[];
+  itemsPerLoad?: number;
 }
 
-export const ProductList: React.FC<ProductListProps> = ({ products }) => {
-  if (products.length === 0) {
-    return <p className={styles.noItems}>Нет товаров для отображения</p>;
-  }
+const ProductList: React.FC<ProductListProps> = ({
+  initialProducts = [],
+  itemsPerLoad = 5,
+}) => {
+  const [products, setProducts] = useState<ProductCardProps[]>(initialProducts);
+  const [isLoading, setIsLoading] = useState(false);
+  const observerRef = useRef<HTMLDivElement>(null);
+
+  const loadMoreProducts = () => {
+    setIsLoading(true);
+    const newProducts = Array.from({ length: itemsPerLoad }, generateRandomProduct);
+    setProducts((prev) => [...prev, ...newProducts]);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !isLoading) {
+          loadMoreProducts();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observer.unobserve(observerRef.current);
+      }
+    };
+  }, [isLoading]);
 
   return (
-    <ul className={styles.list}>
-      {products.map((product) => (
-        <li key={product.id} className={styles.item}>
-          <h3 className={styles.name}>{product.name}</h3>
-          <p className={styles.price}>₽{product.price.toFixed(2)}</p>
-          {product.description && (
-            <p className={styles.description}>{product.description}</p>
-          )}
-          <p
-            className={
-              product.inStock
-                ? styles.inStock
-                : styles.outOfStock
-            }
-          >
-            {product.inStock ? 'В наличии' : 'Нет в наличии'}
-          </p>
-        </li>
-      ))}
-    </ul>
+    <div className="product-list">
+      <div className="products-grid">
+        {products.map((product) => (
+          <ProductCard key={product.id} {...product} />
+        ))}
+      </div>
+
+      {/* Элемент для наблюдения */}
+      <div ref={observerRef} style={{ height: '1px' }} />
+
+      {isLoading && (
+        <div className="loading">
+          Загружаем товары...
+        </div>
+      )}
+    </div>
   );
 };
 
