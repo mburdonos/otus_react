@@ -68,5 +68,6 @@ export const LowPrice: Story = {
       '100 листов, пружинный механизм, подходит для записей и эскизов.',
     price: 199,
     imageUrl: 'note.jpg',
+    discount: true,
   },
 };
