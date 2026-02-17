@@ -16,7 +16,10 @@ const ProductList: React.FC<ProductListProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const observerRef = useRef<HTMLDivElement>(null);
 
+    // Загрузка новых товаров
   const loadMoreProducts = () => {
+    if (isLoading) return;
+    
     setIsLoading(true);
     const newProducts = Array.from({ length: itemsPerLoad }, generateRandomProduct);
     setProducts((prev) => [...prev, ...newProducts]);
