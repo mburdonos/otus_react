@@ -45,7 +45,7 @@ const ProductList: React.FC<ProductListProps> = ({
         observer.unobserve(observerRef.current);
       }
     };
-  }, [isLoading]);
+  }, [loadMoreProducts]);
 
   return (
     <div className="product-list">
