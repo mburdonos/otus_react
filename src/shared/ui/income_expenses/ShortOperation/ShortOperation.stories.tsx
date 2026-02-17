@@ -64,7 +64,6 @@ export const EmptyValues: Story = {
   args: {
     sum_operation: 0,
     category: '',
-    description: '',
     length_description: 30,
   },
 };

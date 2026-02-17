@@ -4,9 +4,9 @@ import styles from './ShortOperation.module.css';
 interface ShortOperationProps {
     sum_operation: number,
     category: string,
-    description: string,
     size: 'small' | 'big',
-    length_description: number,
+    description?: string,
+    length_description?: number,
 };
 
 
@@ -22,7 +22,7 @@ const truncateText = (text: string, maxLength: number) => {
 const ShortOperation: React.FC<ShortOperationProps> = ({
     sum_operation = 0,
     category = 'base category',
-    description = 'base category description',
+    description,
     length_description = 30,
 }) => {
     return (
@@ -37,10 +37,10 @@ const ShortOperation: React.FC<ShortOperationProps> = ({
                 <td className={styles.column_title}>category: </td>
                 <td>{category}</td>
             </tr>
-                        <tr>
+            {description ? <tr>
                 <td className={styles.column_title}>description: </td>
                 <td>{truncateText(description, length_description)}</td>
-            </tr>
+            </tr> : null}
         </table>
     </div>
     );
