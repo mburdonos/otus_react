@@ -19,11 +19,6 @@ export default {
       description: 'Категория операции',
       defaultValue: 'Продукты',
     },
-    description: {
-      control: 'text',
-      description: 'Подробное описание операции',
-      defaultValue: 'Покупка в супермаркете',
-    },
     date_time: {
       control: {
         type: 'date',
@@ -40,6 +35,14 @@ export const Default: Story = {
     category: 'Развлечения',
     description: 'Билет в кино и попкорн',
     date_time: new Date('2026-01-14T19:45:00'),
+  },
+};
+
+export const WithOtherField: Story = {
+  args: {
+    ...Default.args,
+    countGoods:
+      3,
   },
 };
 
