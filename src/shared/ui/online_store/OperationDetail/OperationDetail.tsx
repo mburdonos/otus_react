@@ -7,6 +7,7 @@ interface OperationDetailProps {
   description: string;
   price: number;
   imageUrl: string;
+  discount: boolean;
 }
 
 export const OperationDetail: React.FC<OperationDetailProps> = ({
@@ -15,7 +16,9 @@ export const OperationDetail: React.FC<OperationDetailProps> = ({
   description,
   price,
   imageUrl,
+  discount = false
 }) => {
+  price = discount ? price * 0.9 : price
   return (
     <div className={styles.container}>
       <img
@@ -26,7 +29,7 @@ export const OperationDetail: React.FC<OperationDetailProps> = ({
       <p className={styles.category}>{category}</p>
       <h1 className={styles.title}>{title}</h1>
       <div className={styles.description}>{description}</div>
-      <p className={styles.price}>₽{price.toLocaleString('ru-RU')}</p>
+      <p className={styles.price}>₽{discount ? (<><del>{price.toLocaleString('ru-RU')}</del><div>₽{(price*0.9).toLocaleString('ru-RU')}</div></>) : price.toLocaleString('ru-RU')}</p>
       <button
         type="button"
         className={styles.addToCart}

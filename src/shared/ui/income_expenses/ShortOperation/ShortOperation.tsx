@@ -2,11 +2,11 @@ import React from 'react';
 import styles from './ShortOperation.module.css';
 
 interface ShortOperationProps {
-    sum_operation: number,
+    sumOperation: number,
     category: string,
-    description: string,
     size: 'small' | 'big',
-    length_description: number,
+    description?: string,
+    lengthDescription?: number,
 };
 
 
@@ -20,10 +20,10 @@ const truncateText = (text: string, maxLength: number) => {
 };
 
 const ShortOperation: React.FC<ShortOperationProps> = ({
-    sum_operation = 0,
+    sumOperation = 0,
     category = 'base category',
-    description = 'base category description',
-    length_description = 30,
+    description,
+    lengthDescription = 30,
 }) => {
     return (
     <div className={styles.content}>
@@ -31,16 +31,16 @@ const ShortOperation: React.FC<ShortOperationProps> = ({
         <table>
             <tr>
                 <td className={styles.column_title}>sum_operation: </td>
-                <td>{sum_operation}</td>
+                <td>{sumOperation}</td>
             </tr>
                         <tr>
                 <td className={styles.column_title}>category: </td>
                 <td>{category}</td>
             </tr>
-                        <tr>
+            {description ? <tr>
                 <td className={styles.column_title}>description: </td>
-                <td>{truncateText(description, length_description)}</td>
-            </tr>
+                <td>{truncateText(description, lengthDescription)}</td>
+            </tr> : null}
         </table>
     </div>
     );
