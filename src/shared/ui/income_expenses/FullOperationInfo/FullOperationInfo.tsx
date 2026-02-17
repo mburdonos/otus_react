@@ -2,17 +2,17 @@ import React from 'react';
 import styles from './FullOperationInfo.module.css';
 
 interface FullOperationInfoProps {
-    sum_operation: number,
+    sumOperation: number,
     category: string,
-    date_time: Date,
+    dateTime: Date,
     description?: string,
     countGoods?: number
 };
 
 const FullOperationInfo: React.FC<FullOperationInfoProps> = ({
-    sum_operation = 0,
+    sumOperation = 0,
     category = 'base category',
-    date_time = new Date('2026-01-01'),
+    dateTime = new Date('2026-01-01'),
     ...restProps
 }) => {
     const otherFields = Object.entries(restProps)
@@ -21,7 +21,7 @@ const FullOperationInfo: React.FC<FullOperationInfoProps> = ({
         <table>
             <tr>
                 <td className={styles.column_title}>sum_operation: </td>
-                <td>{sum_operation}</td>
+                <td>{sumOperation}</td>
             </tr>
                         <tr>
                 <td className={styles.column_title}>category: </td>
@@ -29,7 +29,7 @@ const FullOperationInfo: React.FC<FullOperationInfoProps> = ({
             </tr>
             <tr>
                 <td className={styles.column_title}>date: </td>
-                <td>{date_time.toLocaleDateString('ru-RU')} {date_time.toLocaleTimeString('ru-RU')}</td>
+                <td>{dateTime.toLocaleDateString('ru-RU')} {dateTime.toLocaleTimeString('ru-RU')}</td>
             </tr>
             {otherFields.map(([key, value]) => (
           <tr key={key}>

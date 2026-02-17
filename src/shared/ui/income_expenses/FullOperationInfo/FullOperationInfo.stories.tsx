@@ -9,7 +9,7 @@ export default {
   component: FullOperationInfo,
   tags: ['autodocs'],
   argTypes: {
-    sum_operation: {
+    sumOperation: {
       control: 'number',
       description: 'Сумма операции (число)',
       defaultValue: 1500,
@@ -19,7 +19,7 @@ export default {
       description: 'Категория операции',
       defaultValue: 'Продукты',
     },
-    date_time: {
+    dateTime: {
       control: {
         type: 'date',
       },
@@ -31,10 +31,10 @@ export default {
 
 export const Default: Story = {
   args: {
-    sum_operation: 2500,
+    sumOperation: 2500,
     category: 'Развлечения',
     description: 'Билет в кино и попкорн',
-    date_time: new Date('2026-01-14T19:45:00'),
+    dateTime: new Date('2026-01-14T19:45:00'),
   },
 };
 
@@ -56,16 +56,16 @@ export const WithLongDescription: Story = {
 
 export const MinimalValues: Story = {
   args: {
-    sum_operation: 0,
+    sumOperation: 0,
     category: '',
     description: '',
-    date_time: new Date(),
+    dateTime: new Date(),
   },
 };
 
 export const FutureDate: Story = {
   args: {
     ...Default.args,
-    date_time: new Date('2026-12-31T23:59:00'),
+    dateTime: new Date('2026-12-31T23:59:00'),
   },
 };
