@@ -1,0 +1,52 @@
+.content {
+  position: relative;
+  width: 100%;
+}
+
+.rangeInput {
+  position: absolute;
+  pointer-events: none;
+  -webkit-appearance: none;
+  width: 90%;
+  height: 4px;
+  background: transparent;
+  z-index: 100;
+}
+
+/* Стилизация ползунка (thumb) для разных браузеров */
+.rangeInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+   width: 35px;
+  height: 35px;
+  pointer-events: auto;
+  background: #65a7ee;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 2px 4px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgb(22, 21, 21)
+}
+
+.track {
+  position: relative;
+  height: 4px;
+  width: 90%;
+  background-color: #ddd;
+  border-radius: 4px;
+}
+
+.fill {
+  position: absolute;
+  height: 4px;
+  width: 80%;
+  background-color: #65a7ee;
+  border-radius: 2px;
+}
+
+.range_values {
+  display: flex;
+  color: #65a7ee;
+  font-size: 1.5em;
+  justify-content: space-between;
+  margin-top: 30px;
+  width: 90%;
+}
