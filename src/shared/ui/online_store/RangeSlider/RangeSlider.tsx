@@ -1,61 +1,75 @@
 import React, { useState } from 'react';
-import type { ChangeEvent } from 'react';
 import styles from './RangeSlider.module.css';
 
 interface RangeSliderProps {
   min?: number;
   max?: number;
   step?: number;
-  defaultValue?: [number, number];
+  value: [number, number];
   onChange?: (values: [number, number]) => void;
 }
 
-export const RangeSlider = ({
+export const RangeSlider: React.FC<RangeSliderProps> = ({
   min = 0,
   max = 100,
   step = 1,
-  defaultValue = [min, max],
+  value = [min, max],
   onChange,
-}: RangeSliderProps) => {
-  const [values, setValues] = useState<[number, number]>(defaultValue);
+}) => {
+  const [lowValue, setLowValue] = useState(min);
+  const [highValue, setHighValue] = useState(max);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>, index: 0 | 1) => {
-    const newValues = [...values] as [number, number];
-    newValues[index] = Number(e.target.value);
-    setValues(newValues);
-    if (onChange) onChange(newValues);
+  const handleLowChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseInt(e.target.value, 0);
+    if (newValue < highValue){
+      setLowValue(newValue);
+      onChange?.([newValue, highValue]);
+    }
+  };
+
+  const handleHighChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseInt(e.target.value, 0);
+    if (newValue > lowValue){
+      setHighValue(newValue);
+      onChange?.([lowValue, newValue]);
+    }
   };
 
   return (
-    <div className={styles.sliderContainer}>
-      <div className={styles.rangeDisplay}>
-        <span>{values[0]}</span>
-        <span>—</span>
-        <span>{values[1]}</span>
+    <>
+    <div className={styles.content}>
+      <input
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={lowValue}
+        onChange={handleLowChange}
+        className={styles.rangeInput}
+      />
+      <input
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={highValue}
+        onChange={handleHighChange}
+        className={styles.rangeInput}
+      />
+      <div className={styles.track}>
+          <div className={styles.fill}
+          style={{
+            left: `${((lowValue-min)/(max-min))*100}%`,
+            width: `${((highValue - lowValue)/(max-min))*100}%`
+          }}></div>
       </div>
-      <div className={styles.sliders}>
-        <input
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={values[0]}
-          onChange={(e) => handleChange(e, 0)}
-          className={styles.slider}
-          style={{ '--percent': ((values[0] - min) / (max - min)) * 100 } as React.CSSProperties}
-        />
-        <input
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={values[1]}
-          onChange={(e) => handleChange(e, 1)}
-          className={styles.slider}
-          style={{ '--percent': ((values[1] - min) / (max - min)) * 100 } as React.CSSProperties}
-        />
-      </div>
+       <div className={styles.range_values}>
+            <span>{lowValue}</span>
+            <span>{highValue}</span>
+          </div>
     </div>
+    </>
+    
   );
 };
 
