@@ -16,14 +16,14 @@ export const RangeSlider: React.FC<RangeSliderProps> = ({
   const [highValue, setHighValue] = useState(max);
 
   const handleLowChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseInt(e.target.value, 0);
+    const newValue = parseInt(e.target.value, 10);
     if (newValue < highValue){
       setLowValue(newValue);
     }
   };
 
   const handleHighChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseInt(e.target.value, 0);
+    const newValue = parseInt(e.target.value, 20);
     if (newValue > lowValue){
       setHighValue(newValue);
     }
