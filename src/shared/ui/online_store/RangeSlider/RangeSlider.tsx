@@ -10,7 +10,7 @@ interface RangeSliderProps {
 export const RangeSlider: React.FC<RangeSliderProps> = ({
   min = 0,
   max = 100,
-  step = 1
+  step = 1,
 }) => {
   const [lowValue, setLowValue] = useState(min);
   const [highValue, setHighValue] = useState(max);
@@ -23,7 +23,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = ({
   };
 
   const handleHighChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseInt(e.target.value, 20);
+    const newValue = parseInt(e.target.value, 10);
     if (newValue > lowValue){
       setHighValue(newValue);
     }
