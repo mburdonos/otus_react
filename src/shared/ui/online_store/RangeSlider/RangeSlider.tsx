@@ -2,36 +2,30 @@ import React, { useState } from 'react';
 import styles from './RangeSlider.module.css';
 
 interface RangeSliderProps {
-  min?: number;
-  max?: number;
+  min: number;
+  max: number;
   step?: number;
-  value: [number, number];
-  onChange?: (values: [number, number]) => void;
 }
 
 export const RangeSlider: React.FC<RangeSliderProps> = ({
   min = 0,
   max = 100,
-  step = 1,
-  value = [min, max],
-  onChange,
+  step = 1
 }) => {
   const [lowValue, setLowValue] = useState(min);
   const [highValue, setHighValue] = useState(max);
 
   const handleLowChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseInt(e.target.value, 0);
+    const newValue = parseInt(e.target.value, 10);
     if (newValue < highValue){
       setLowValue(newValue);
-      onChange?.([newValue, highValue]);
     }
   };
 
   const handleHighChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseInt(e.target.value, 0);
+    const newValue = parseInt(e.target.value, 20);
     if (newValue > lowValue){
       setHighValue(newValue);
-      onChange?.([lowValue, newValue]);
     }
   };
 
