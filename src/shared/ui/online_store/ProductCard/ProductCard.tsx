@@ -9,7 +9,7 @@ export interface ProductCardProps {
   imageUrl: string;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
+const ProductCard: React.FC<ProductCardProps> = React.memo(({
   id,
   title,
   description,
@@ -35,7 +35,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       </button>
     </div>
   );
-};
+});
 
 ProductCard.displayName = 'ProductCard';
 
