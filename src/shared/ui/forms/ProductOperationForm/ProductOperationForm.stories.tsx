@@ -5,7 +5,7 @@ import { ProductOperationForm } from './ProductOperationForm'; // Обычный
 import type { ProductOperationData } from './ProductOperationForm'; // Type‑only импорт типа
 
 const meta: Meta<typeof ProductOperationForm> = {
-  title: 'Forms/ProductOperationForm',
+  title: 'UI/forms/ProductOperationForm',
   component: ProductOperationForm,
   tags: ['autodocs'],
   parameters: {

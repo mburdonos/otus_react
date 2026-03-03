@@ -90,7 +90,7 @@ const mockFormManager: FormikContextType<{ name: string; about: string }> = {
 };
 
 const meta: Meta<typeof ProfileForm> = {
-  title: 'Forms/ProfileForm',
+  title: 'UI/forms/ProfileForm',
   component: ProfileForm,
   tags: ['autodocs'],
   argTypes: {

@@ -65,7 +65,7 @@ export const ProductOperationForm = memo<ProductOperationFormProps>(
               Продукт
             </Option>
             <Option value="operation">
-              Услуга
+              Операция
             </Option>
           </Select>
         </Form.Item>
