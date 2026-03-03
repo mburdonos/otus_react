@@ -34,7 +34,7 @@ const mockFormManager = {
 };
 
 const meta: Meta<typeof AuthForm> = {
-  title: 'Forms/AuthForm',
+  title: 'UI/forms/AuthForm',
   component: AuthForm,
   tags: ['autodocs'],
   parameters: {
