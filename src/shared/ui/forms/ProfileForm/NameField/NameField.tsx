@@ -46,7 +46,7 @@ export const NameField = memo<NameFieldProps>(
           disabled={disabled}
           ref={autoFocusElement}
           data-cy="input"
-          autoFocus
+          autoFocus={false}
           name="name"
           onChange={onChange}
           onBlur={onBlur}
