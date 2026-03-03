@@ -3,10 +3,10 @@ import cn from 'clsx';
 import Input from 'antd/lib/input';
 import type { FormikHandlers } from 'formik/dist/types';
 import { useTranslation } from 'react-i18next';
-import { FormItem } from '../../FormItem/FormItem';
+import { FormItem } from '../../otherComponents/FormItem';
 import { getValidates } from '../../../../../utils/validation';
 import type { ProfileFormProps } from '../types';
-import styles from './AboutField.module.css'; // Импортируем CSS‑модуль
+import s from './AboutField.sass';
 
 export type AboutFieldProps = Pick<ProfileFormProps, 'className' | 'disabled'> & {
   submitCount: number;
@@ -23,17 +23,10 @@ export const AboutField = memo<AboutFieldProps>(
 
     const { validateStatus, help } = getValidates(errors, touched, submitCount);
 
-    // Определяем дополнительный класс на основе статуса валидации
-    const validationClass = validateStatus ? styles[validateStatus] : '';
-
     return (
       <FormItem
-        className={cn(
-          styles.root,           // Основные стили из модуля
-          validationClass,         // Условный класс для статуса валидации
-          className              // Дополнительные классы из пропсов
-        )}
-        title='Описание: '
+        className={cn(s.root, className)}
+        title={t(`forms.ProfileForm.about.title`)}
         validateStatus={validateStatus}
         help={help}
       >
@@ -43,7 +36,7 @@ export const AboutField = memo<AboutFieldProps>(
           onChange={onChange}
           onBlur={onBlur}
           value={value}
-          placeholder={t(`Введите описание`)}
+          placeholder={t(`forms.ProfileForm.about.placeholder`)}
         />
       </FormItem>
     );

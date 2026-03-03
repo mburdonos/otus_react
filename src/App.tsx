@@ -4,7 +4,6 @@ import viteLogo from '/vite.svg';
 import './App.css';
 import { ThemeToggle } from './shared/ui/base_components/ThemeToggle/ThemeToggle';
 import LanguageSwitcher from './shared/ui/base_components/LanguageSwitcher/LanguageSwitcher';
-import { ProfileForm } from './shared/ui/forms';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,7 +20,6 @@ function App() {
       </div>
       <LanguageSwitcher></LanguageSwitcher>
       <ThemeToggle></ThemeToggle>
-      <ProfileForm></ProfileForm>
       <h1>Vite + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>

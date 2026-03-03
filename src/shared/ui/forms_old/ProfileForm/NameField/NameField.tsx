@@ -4,10 +4,10 @@ import { Input } from 'antd';
 import type { FormikHandlers } from 'formik/dist/types';
 import { UserOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import { FormItem } from '../../FormItem/FormItem';
+import { FormItem } from '../../otherComponents/FormItem';
 import { getValidates } from '../../../../../utils/validation';
 import type { ProfileFormProps } from '../types';
-import styles from './NameField.module.css'; // Импортируем CSS‑модуль
+import s from './NameField.sass';
 
 export type NameFieldProps = Pick<ProfileFormProps, 'className' | 'disabled' | 'autoFocusElement'> & {
   submitCount: number;
@@ -26,17 +26,10 @@ export const NameField = memo<NameFieldProps>(
 
     const { validateStatus, help } = getValidates(errors, touched, submitCount);
 
-    // Определяем дополнительный класс на основе статуса валидации
-    const validationClass = validateStatus ? styles[validateStatus] : '';
-
     return (
       <FormItem
-        className={cn(
-          styles.root,      // Основные стили из модуля
-          validationClass,    // Условный класс для статуса валидации
-          className         // Дополнительные классы из пропсов
-        )}
-        title='Имя: '
+        className={cn(s.root, className)}
+        title={t(`forms.ProfileForm.name.title`)}
         required
         validateStatus={validateStatus}
         help={help}
@@ -51,7 +44,7 @@ export const NameField = memo<NameFieldProps>(
           onChange={onChange}
           onBlur={onBlur}
           value={value}
-          placeholder={t(`Введите имя пользователя`)}
+          placeholder={t(`forms.ProfileForm.name.placeholder`)}
         />
       </FormItem>
     );

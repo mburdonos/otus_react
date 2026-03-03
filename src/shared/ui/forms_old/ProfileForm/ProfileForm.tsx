@@ -1,10 +1,9 @@
-// src/components/ProfileForm/ProfileForm.tsx
 import React, { memo } from 'react';
 import cn from 'clsx';
-import type { ProfileFormProps } from './types.ts';
+import type { ProfileFormProps } from './types';
 import { NameField } from './NameField';
 import { AboutField } from './AboutField';
-import styles from './ProfileForm.module.css';
+import styles from './ProfileForm.module.css'; // Импортируем CSS‑модуль
 
 export const ProfileForm = memo<ProfileFormProps>(
   ({ className, formManager, formElement, autoFocusElement, disabled }) => {
@@ -15,9 +14,9 @@ export const ProfileForm = memo<ProfileFormProps>(
         ref={formElement}
         onSubmit={handleSubmit}
         className={cn(
-          styles.root,
-          disabled && styles.disabled,
-          className
+          styles.root, // Используем стили из CSS‑модуля
+          disabled && styles.disabled, // Условное применение класса
+          className // Дополнительные классы из пропсов
         )}
       >
         <NameField

@@ -1,11 +1,10 @@
-import { FormProps } from 'src/features/forms/types';
+// src/components/ProfileForm/types.ts
+import type { FormikContextType } from 'formik';
 
-export type ProfileFormValues = {
-  name: string;
-  about: string;
-};
-
-export type ProfileFormErrors = Record<keyof ProfileFormValues, string>;
-export type ProfileFormTouched = Record<keyof ProfileFormValues, boolean>;
-
-export type ProfileFormProps = FormProps<ProfileFormValues>;
+export interface ProfileFormProps {
+  className?: string;
+  formManager: FormikContextType<{ name: string; about: string }>;
+  formElement?: React.RefObject<HTMLFormElement>;
+  autoFocusElement?: string;
+  disabled?: boolean;
+}
