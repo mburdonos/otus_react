@@ -31,9 +31,17 @@ const mockFormManager: FormikContextType<{ name: string; about: string }> = {
       console.log('Form submitted');
     }
   },
-  handleChange: (event?: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    if (event) console.log('Change event:', event.target.name, event.target.value);
-  },
+handleChange: (event?: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  if (event) {
+    const { name, value } = event.target;
+    console.log('Change event:', name, value);
+    // Обновляем values в макете
+    mockFormManager.values = {
+      ...mockFormManager.values,
+      [name]: value
+    };
+  }
+},
   setFieldValue: async (field: string, value: any) => {
     console.log(`Setting field ${field} to ${value}`);
   },
