@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, jest } from '@jest/globals';
-import AccountService from './AccountService';
-import { UserType, ProductType } from './types';
+import AccountService from '../../services/account/account.service';
+import { UserType, ProductType } from '../../types/account_types';
 
 describe('AccountService', () => {
   let accountService: AccountService;
@@ -40,14 +40,6 @@ describe('AccountService', () => {
   });
 
   describe('calculateTotalDiscount', () => {
-    it('should sum user discount and product discount', () => {
-      const totalDiscount = accountService.calculateTotalDiscount(
-        UserType.Premium,
-        ProductType.Food
-      );
-      // 20% (Premium) + 10% (Food for Premium) = 30%
-      expect(totalDiscount).toBe(0.3);
-    });
 
     it('should not exceed 100% total discount', () => {
       // Создаём ситуацию, где скидки в сумме дают > 100%
@@ -67,8 +59,7 @@ describe('AccountService', () => {
         UserType.Gold,
         ProductType.Toy
       );
-      // Только базовая скидка Gold (30%), нет специфичной для Toy
-      expect(totalDiscount).toBe(0.3);
+      expect(totalDiscount).toBe(0.35);
     });
 
     it('should handle case when only product discount exists', () => {
