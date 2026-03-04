@@ -12,6 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@jest/globals": "^30.2.0",
     "antd": "^6.3.1",
     "clsx": "^2.1.1",
     "formik": "^2.4.9",
