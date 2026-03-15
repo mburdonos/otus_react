@@ -30375,7 +30375,7 @@ var require_es_object_atoms = __commonJS2({
       "%encodeURIComponent%": encodeURIComponent,
       "%Error%": $Error,
       "%eval%": eval,
-      // eslint-disable-line no-eval
+       
       "%EvalError%": $EvalError,
       "%Float16Array%": typeof Float16Array > "u" ? undefined2 : Float16Array,
       "%Float32Array%": typeof Float32Array > "u" ? undefined2 : Float32Array,
@@ -40435,7 +40435,7 @@ function normaliseOptions({
   maxArrayLength = 1 / 0,
   breakLength = 1 / 0,
   seen = [],
-  // eslint-disable-next-line no-shadow
+   
   truncate: truncate3 = 1 / 0,
   stylize = String
 } = {}, inspect5) {
@@ -42569,7 +42569,7 @@ function normaliseOptions2({
   maxArrayLength = 1 / 0,
   breakLength = 1 / 0,
   seen = [],
-  // eslint-disable-next-line no-shadow
+   
   truncate: truncate22 = 1 / 0,
   stylize = String
 } = {}, inspect32) {
@@ -43078,7 +43078,7 @@ function deepEqual(leftHandOperand, rightHandOperand, options) {
 }
 __name(deepEqual, "deepEqual");
 function simpleEqual(leftHandOperand, rightHandOperand) {
-  return leftHandOperand === rightHandOperand ? leftHandOperand !== 0 || 1 / leftHandOperand === 1 / rightHandOperand : leftHandOperand !== leftHandOperand && // eslint-disable-line no-self-compare
+  return leftHandOperand === rightHandOperand ? leftHandOperand !== 0 || 1 / leftHandOperand === 1 / rightHandOperand : leftHandOperand !== leftHandOperand &&  
   rightHandOperand !== rightHandOperand ? !0 : isPrimitive2(leftHandOperand) || isPrimitive2(rightHandOperand) ? !1 : null;
 }
 __name(simpleEqual, "simpleEqual");
@@ -43507,7 +43507,7 @@ function proxify(obj, nonChainableMethodName) {
         throw getProperties(target).forEach(function(prop) {
           if (
             // we actually mean to check `Object.prototype` here
-            // eslint-disable-next-line no-prototype-builtins
+             
             !Object.prototype.hasOwnProperty(prop) && builtins.indexOf(prop) === -1
           ) {
             let dist = stringDistanceCapped(property, prop, suggestionDistance);
@@ -45914,9 +45914,9 @@ var SetLike = (function() {
 function getLocalName(element) {
   var _element$localName;
   return (
-    // eslint-disable-next-line no-restricted-properties -- actual guard for environments without localName
+     
     (_element$localName = element.localName) !== null && _element$localName !== void 0 ? _element$localName : (
-      // eslint-disable-next-line no-restricted-properties -- required for the fallback
+       
       element.tagName.toLowerCase()
     )
   );
@@ -46508,7 +46508,7 @@ var import_aria_query = __toESM(require_lib2(), 1), import_picocolors = __toESM(
         ""
       ),
       "",
-      // eslint-disable-next-line new-cap
+       
       `${context.utils.RECEIVED_COLOR(
         "received"
       )} value must ${expectedString}.`,
@@ -46546,9 +46546,9 @@ var InvalidCSSError = class extends Error {
     super(), Error.captureStackTrace && Error.captureStackTrace(this, matcherFn), this.message = [
       received.message,
       "",
-      // eslint-disable-next-line new-cap
+       
       context.utils.RECEIVED_COLOR("Failing css:"),
-      // eslint-disable-next-line new-cap
+       
       context.utils.RECEIVED_COLOR(`${received.css}`)
     ].join(`
 `);
@@ -46578,12 +46578,12 @@ function getMessage3(context, matcher, expectedLabel, expectedValue, receivedLab
   return [
     `${matcher}
 `,
-    // eslint-disable-next-line new-cap
+     
     `${expectedLabel}:
 ${context.utils.EXPECTED_COLOR(
       (0, import_redent.default)(display(context, expectedValue), 2)
     )}`,
-    // eslint-disable-next-line new-cap
+     
     `${receivedLabel}:
 ${context.utils.RECEIVED_COLOR(
       (0, import_redent.default)(display(context, receivedValue), 2)
@@ -46682,7 +46682,7 @@ function toBeInTheDocument(element) {
         ""
       ),
       "",
-      // eslint-disable-next-line new-cap
+       
       this.utils.RECEIVED_COLOR(this.isNot ? errorFound() : errorNotFound())
     ].join(`
 `)
@@ -46736,7 +46736,7 @@ function toContainElement(container, element) {
         "element"
       ),
       "",
-      // eslint-disable-next-line new-cap
+       
       this.utils.RECEIVED_COLOR(`${this.utils.stringify(
         container.cloneNode(!1)
       )} ${this.isNot ? "contains:" : "does not contain:"} ${this.utils.stringify(element && element.cloneNode(!1))}
@@ -46761,7 +46761,7 @@ function toContainHTML(container, htmlText) {
         ""
       ),
       "Expected:",
-      // eslint-disable-next-line new-cap
+       
       `  ${this.utils.EXPECTED_COLOR(htmlText)}`,
       "Received:",
       `  ${this.utils.printReceived(container.cloneNode(!0))}`
@@ -49746,9 +49746,9 @@ var SetLike2 = (function() {
 function getLocalName2(element) {
   var _element$localName;
   return (
-    // eslint-disable-next-line no-restricted-properties -- actual guard for environments without localName
+     
     (_element$localName = element.localName) !== null && _element$localName !== void 0 ? _element$localName : (
-      // eslint-disable-next-line no-restricted-properties -- required for the fallback
+       
       element.tagName.toLowerCase()
     )
   );
@@ -50414,7 +50414,7 @@ function jestFakeTimersAreEnabled() {
   return typeof jest < "u" && jest !== null ? (
     // legacy timers
     setTimeout._isMockFunction === !0 || // modern timers
-    // eslint-disable-next-line prefer-object-has-own -- not supported by our support matrix
+     
     Object.prototype.hasOwnProperty.call(setTimeout, "clock")
   ) : !1;
 }
