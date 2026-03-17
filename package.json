@@ -16,10 +16,12 @@
   },
   "dependencies": {
     "@jest/globals": "^30.2.0",
+    "@storybook/react": "^10.2.19",
     "antd": "^6.3.1",
     "clsx": "^2.1.1",
     "formik": "^2.4.9",
     "i18next": "^25.8.0",
+    "random-js": "^2.1.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-i18next": "^16.5.4",
@@ -54,7 +56,7 @@
     "sass": "^1.97.3",
     "sass-embedded": "^1.97.3",
     "ts-jest": "^29.4.6",
-    "typescript": "~5.9.3",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4",
     "vitest": "^4.0.16"

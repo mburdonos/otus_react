@@ -10,14 +10,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true
   },
-  // "references": [
-  //   { "path": "./tsconfig.app.json" },
-  //   { "path": "./tsconfig.node.json" }
-  // ],
-  "include": ["src/main.tsx", "src/types/**/*"]
-  //  "include": ["src/**/*", "src/types/**/*"]
+   "include": ["src/**/*", "src/types/**/*"]
 }

@@ -28,9 +28,9 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   useInsertionEffect(() => {
     localStorage.setItem(KEY, theme);
     const html = document.body.parentElement;
-    html.classList.add(theme);
+    html?.classList.add(theme);
 
-    return () => html.classList.remove(theme);
+    return () => html?.classList.remove(theme);
   }, [theme]);
 
   const toggleTheme = useCallback(() => setTheme((v) => (v === Theme.light ? Theme.dark : Theme.light)), []);
