@@ -8,10 +8,11 @@ import i18n from './i18n'; // Инициализация i18n
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider>
-      <LanguageProvider>
-    <App />
+    {/* <ThemeProvider>
+      <LanguageProvider> */}
+        <h1>Моё приложение</h1>
+    {/* <App />
     </LanguageProvider>
-    </ThemeProvider>
+    </ThemeProvider> */}
   </StrictMode>,
 )
