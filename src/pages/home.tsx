@@ -1,8 +1,16 @@
 // components/home.tsx
 import React from 'react';
 import styles from '../pages_css/home.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export function Home() {
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/otus_react/catalog'); // переход на /new-route
+  };
+
   return (
     <div className={styles['home_block']}>
       <div className={styles['home-container']}>
@@ -36,7 +44,7 @@ export function Home() {
             Ознакомьтесь с нашим каталогом и найдите то, что нужно именно вам.
             У нас вы найдёте товары на любой вкус и бюджет.
           </p>
-          <button className={styles['cta-button']}>Перейти в каталог</button>
+          <button className={styles['cta-button']} onClick={handleClick}>Перейти в каталог</button>
         </section>
       </div>
     </div>
