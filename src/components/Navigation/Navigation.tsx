@@ -5,7 +5,7 @@ export function Navigation() {
   return (
     <nav className={styles.navigation}>
       <NavLink
-        to="/"
+        to="/otus_react/"
         className={({ isActive }) =>
           isActive ? styles['active-link'] : styles['nav-link']
         }
@@ -13,7 +13,7 @@ export function Navigation() {
         home
       </NavLink>
       <NavLink
-        to="/catalog"
+        to="/otus_react/catalog"
         className={({ isActive }) =>
           isActive ? styles['active-link'] : styles['nav-link']
         }
@@ -21,7 +21,7 @@ export function Navigation() {
         catalog
       </NavLink>
       <NavLink
-        to="/cart"
+        to="/otus_react/cart"
         className={({ isActive }) =>
           isActive ? styles['active-link'] : styles['nav-link']
         }

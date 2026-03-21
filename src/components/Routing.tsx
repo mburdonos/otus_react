@@ -7,9 +7,9 @@ export function Routing() {
     return (
         <>
         <Routes>
-            <Route path='/' element={ <Home /> }/>
-            <Route path='/catalog'  element={ <Catalog /> }/>
-            <Route path='/cart' element={ <Cart /> } />
+            <Route path='/otus_react/' element={ <Home /> }/>
+            <Route path='/otus_react/catalog'  element={ <Catalog /> }/>
+            <Route path='/otus_react/cart' element={ <Cart /> } />
         </Routes>
         </>
     )

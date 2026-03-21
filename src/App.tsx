@@ -15,9 +15,12 @@ function App() {
   return (
     <>
     <BrowserRouter>
+      <div>
+        <Header title="shop" children={<Navigation />} />
+        <main>
           <Routing />
-      <Header title="shop" children={ <Navigation /> }/>
-
+        </main>
+      </div>
     </BrowserRouter>
     </>
   )

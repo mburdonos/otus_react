@@ -1,16 +1,16 @@
 // components/home.tsx
 import React from 'react';
+import styles from '../pages_css/home.module.css';
 
-export function Home () {
+export function Home() {
   return (
-    <div className="home-container">
-      <header className="home-header">
+    <div className={styles['home_block']}>
+      <div className={styles['home-container']}>
         <h1>Добро пожаловать в наш магазин!</h1>
-        <p className="tagline">Качественные товары по выгодным ценам</p>
-      </header>
-
-      <main className="home-content">
-        <section className="about-section">
+        <p className={styles['tagline']}>Качественные товары по выгодным ценам</p>
+      </div>
+      <div className={styles['home-content']}>
+        <section className={styles['about-section']}>
           <h2>О нас</h2>
           <p>
             Мы — современный интернет‑магазин, предлагающий широкий ассортимент товаров
@@ -19,9 +19,9 @@ export function Home () {
           </p>
         </section>
 
-        <section className="values-section">
+        <section className={styles['values-section']}>
           <h2>Наши преимущества</h2>
-          <ul className="advantages-list">
+          <ul className={styles['advantages-list']}>
             <li>Широкий выбор товаров в наличии</li>
             <li>Гарантия качества на всю продукцию</li>
             <li>Быстрая доставка по всей стране</li>
@@ -30,23 +30,15 @@ export function Home () {
           </ul>
         </section>
 
-        <section className="call-to-action">
+        <section className={styles['call-to-action']}>
           <h2>Начните покупки прямо сейчас!</h2>
           <p>
             Ознакомьтесь с нашим каталогом и найдите то, что нужно именно вам.
             У нас вы найдёте товары на любой вкус и бюджет.
           </p>
-          <button className="cta-button">Перейти в каталог</button>
+          <button className={styles['cta-button']}>Перейти в каталог</button>
         </section>
-      </main>
-
-      <footer className="home-footer">
-        <p>
-          Остались вопросы? Свяжитесь с нами:
-          {' '}
-          <a href="mailto:info@example.com">info@example.com</a>
-        </p>
-      </footer>
+      </div>
     </div>
   );
-};
+}
