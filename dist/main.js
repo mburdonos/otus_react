@@ -1,0 +1,10 @@
+import { jsx as _jsx } from "react/jsx-runtime";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { ThemeProvider } from './context/ThemeProvider';
+import { LanguageProvider } from './context/LanguageContext';
+import { Provider } from 'react-redux';
+import { store } from './store';
+import './index.css';
+import App from './App';
+createRoot(document.getElementById('root')).render(_jsx(StrictMode, { children: _jsx(ThemeProvider, { children: _jsx(LanguageProvider, { children: _jsx(Provider, { store: store, children: _jsx(App, {}) }) }) }) }));
