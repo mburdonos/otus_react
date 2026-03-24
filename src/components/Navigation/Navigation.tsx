@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import styles from './Navigation.module.css';
+import { CartBadge } from '../CartBadge/CartBadge';
 
 export function Navigation() {
   return (
@@ -21,13 +22,16 @@ export function Navigation() {
         catalog
       </NavLink>
       <NavLink
-        to="/otus_react/cart"
-        className={({ isActive }) =>
-          isActive ? styles['active-link'] : styles['nav-link']
-        }
-      >
-        cart
-      </NavLink>
+  to="/otus_react/cart"
+  className={({ isActive }) =>
+    isActive ? styles['active-link'] : styles['nav-link']
+  }
+>
+  <span className={styles.cartLink}>
+    cart
+    <CartBadge />
+  </span>
+</NavLink>
     </nav>
   );
 }

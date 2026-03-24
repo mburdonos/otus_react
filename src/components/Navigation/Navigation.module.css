@@ -1,22 +1,27 @@
 .navigation {
   display: flex;
-  gap: 2rem;
+  gap: 20px;
   align-items: center;
 }
 
 .nav-link {
   text-decoration: none;
   color: #333;
-  padding: 0.5rem 1rem;
-  transition: color 0.3s ease;
-    font-size: 1.5rem;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: color 0.3s;
 }
 
 .active-link {
-  color: #4a6fa5;
+  color: #007bff;
   font-weight: bold;
-  font-size: 1.7rem;
 }
+.cartLink {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* Отступ между текстом и бейджем */
+}
+
 
 @media (max-width: 768px) {
   .navigation {

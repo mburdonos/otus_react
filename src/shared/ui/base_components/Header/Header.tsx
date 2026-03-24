@@ -25,6 +25,7 @@ const Header: React.FC<HeaderProps> = ({ title, className, children }) => {
     <div className={ styles.navigation }>{ children }</div>
     </div>
     <div className={styles.other_components}>
+      <button></button>
     <ThemeToggle />
     </div>
     
