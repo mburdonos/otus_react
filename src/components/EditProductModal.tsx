@@ -63,7 +63,7 @@ const EditProductModal: React.FC<EditProductModalProps> = ({
 
   return (
     <div className="modal-overlay">
-      <div className="modal">
+      <div className="modal" style={{color: 'white'}}>
         <h2>Редактирование товара</h2>
         <div className="modal-form">
           <div>
