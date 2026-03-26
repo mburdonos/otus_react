@@ -1,5 +1,5 @@
 import React from 'react';
-import { Product } from '../store/cartSlice';
+import { Product } from '../feature/cart/cartSlice';
 
 interface ProductEditFormProps {
   product: Product | null;
