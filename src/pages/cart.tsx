@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from '../store/hooks';
-import { removeFromCart } from '../feature/cart/cartSlice';
-import type { Product } from '../feature/cart/cartSlice';
+import { removeFromCart } from '../features/cart/cartSlice';
+import type { Product } from '../features/cart/cartSlice';
 import styles from '../pages_css/сart.module.css';
 
 export function Cart() {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Product } from '../feature/cart/cartSlice';
+import { Product } from '../features/cart/cartSlice';
 
 interface EditProductModalProps {
   onClose: () => void;
