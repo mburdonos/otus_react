@@ -1,0 +1,49 @@
+.container {
+  padding: 1rem;
+}
+
+.title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.card {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.card p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.infoCard {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+  margin-top: 1.5rem;
+}
+
+.infoCard h4 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.infoCard p {
+  margin: 0.5rem 0;
+}
+
+.infoCard strong {
+  color: #495057;
+}
