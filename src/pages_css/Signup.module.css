@@ -51,8 +51,28 @@
   border-color: #007bff;
 }
 
-.loginButton {
-  background-color: #007bff;
+.inputError {
+  border-color: #dc3545;
+}
+
+.fieldError {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 0.25rem;
+}
+
+.error {
+  color: #dc3545;
+  font-size: 14px;
+  padding: 0.5rem;
+  background-color: #f8d7da;
+  border-radius: 4px;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.submitButton {
+  background-color: #28a745;
   color: white;
   border: none;
   padding: 0.75rem;
@@ -63,62 +83,48 @@
   margin-top: 0.5rem;
 }
 
-.loginButton:hover {
-  background-color: #0056b3;
-}
-
-.demoButton {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 0.75rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 1rem;
-  width: 100%;
-  transition: background-color 0.3s;
-}
-
-.demoButton:hover {
+.submitButton:hover:not(:disabled) {
   background-color: #218838;
 }
 
-.error {
-  color: #dc3545;
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loginLink {
+  text-align: center;
+  margin-top: 1rem;
   font-size: 14px;
-  padding: 0.5rem;
-  background-color: #f8d7da;
-  border-radius: 4px;
-  text-align: center;
-}
-
-.info {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background-color: #e9ecef;
-  border-radius: 4px;
-  text-align: center;
-}
-
-.info p {
-  margin: 0.25rem 0;
-  font-size: 12px;
   color: #666;
 }
 
-.info strong {
-  color: #333;
-  font-size: 13px;
+.loginLink a {
+  color: #007bff;
+  text-decoration: none;
 }
 
-/* Добавьте в существующий Login.module.css */
-.inputError {
-  border-color: #dc3545;
+.loginLink a:hover {
+  text-decoration: underline;
 }
 
-.fieldError {
-  color: #dc3545;
+/* Добавьте в Signup.module.css */
+.debugInfo {
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
   font-size: 12px;
-  margin-top: 0.25rem;
+}
+
+.debugInfo details summary {
+  cursor: pointer;
+  color: #6c757d;
+}
+
+.debugInfo details p {
+  margin: 0.5rem 0 0;
+  color: #6c757d;
+  font-family: monospace;
+  font-size: 11px;
 }
