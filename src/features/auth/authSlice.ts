@@ -1,3 +1,4 @@
+// store/authSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface User {
@@ -46,6 +47,7 @@ const authSlice = createSlice({
       state.profile = null;
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      // Не удаляем корзину, она остается в localStorage
     },
     hydrateAuth: (state) => {
       const token = localStorage.getItem('token');

@@ -1,3 +1,4 @@
+// pages/Signup.tsx
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAppDispatch } from '../store/hooks';
@@ -69,20 +70,18 @@ const Signup = () => {
         signUpDate: profile.signUpDate,
       }));
       
-      navigate('/dashboard');
+      // Перенаправляем на страницу каталога
+      navigate('/catalog');
     } catch (err) {
       console.error('Signup error:', err);
       
       const error = err as ApiErrorResponse;
       
-      // Детальная обработка ошибок
       if (error.errors) {
-        // Если сервер вернул детальные ошибки по полям
         setFieldErrors(error.errors);
       } else if (error.message) {
         const message = error.message.toLowerCase();
         
-        // Обработка различных типов ошибок
         if (message.includes('email') || message.includes('valid')) {
           setFieldErrors({ email: [error.message] });
         } else if (message.includes('password')) {
@@ -158,15 +157,6 @@ const Signup = () => {
         <p className={styles.loginLink}>
           Already have an account? <Link to="/login">Login</Link>
         </p>
-        
-        <div className={styles.debugInfo}>
-          <details>
-            <summary>Debug Info</summary>
-            <p><strong>API URL:</strong> {API_BASE_URL}</p>
-            <p><strong>Command ID:</strong> {COMMAND_ID}</p>
-            <p><strong>Request format:</strong> {`{ email, password, commandId }`}</p>
-          </details>
-        </div>
       </div>
     </div>
   );

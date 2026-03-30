@@ -1,3 +1,4 @@
+// pages/LoginForm.tsx
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAppDispatch } from '../../store/hooks';
@@ -5,7 +6,7 @@ import { setCredentials, setUser } from '../../features/auth/authSlice';
 import { signin, getProfile, ApiErrorResponse } from '../../services/api';
 import styles from './LoginForm.module.css';
 
-const Login = () => {
+const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -20,11 +21,24 @@ const Login = () => {
     setFieldErrors({});
     setIsLoading(true);
 
+    // Валидация
+    if (!email.trim()) {
+      setFieldErrors({ email: ['Email is required'] });
+      setIsLoading(false);
+      return;
+    }
+    
+    if (!password.trim()) {
+      setFieldErrors({ password: ['Password is required'] });
+      setIsLoading(false);
+      return;
+    }
+
     try {
-      console.log('Attempting login for:', email);
+      console.log('Attempting login with email:', email);
       
       // 1. Авторизация
-      const authResult = await signin({ email, password });
+      const authResult = await signin({ email: email.trim(), password });
       
       console.log('Login successful, token received');
       
@@ -45,14 +59,21 @@ const Login = () => {
         signUpDate: profile.signUpDate,
       }));
       
-      navigate('/dashboard');
+      // Перенаправляем на страницу каталога
+      navigate('/catalog');
     } catch (err) {
       console.error('Login error:', err);
       
       const error = err as ApiErrorResponse;
       
-      if (error.errors) {
+      if (error.errors && Array.isArray(error.errors)) {
+        setError(error.errors.join(', '));
+      } else if (error.errors && typeof error.errors === 'object') {
         setFieldErrors(error.errors);
+        const firstError = Object.values(error.errors)[0];
+        if (firstError && Array.isArray(firstError)) {
+          setError(firstError[0]);
+        }
       } else if (error.message) {
         setError(error.message);
       } else {
@@ -126,4 +147,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginForm;

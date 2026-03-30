@@ -1,16 +1,45 @@
-import React from 'react';
+// components/CartBadge.tsx (с иконкой корзины)
+import React, { useEffect, useState } from 'react';
 import { useAppSelector } from '../../store/hooks';
+import { Link } from 'react-router-dom';
 import styles from './CartBadge.module.css';
 
-export const CartBadge: React.FC = () => {
-  const cartItems = useAppSelector(state => state.cart.items);
-  const itemCount = cartItems.length;
+export function CartBadge() {
+  const { user, isAuthenticated } = useAppSelector((state) => state.auth);
+  const allCartItems = useAppSelector(state => state.cart);
+  const [itemCount, setItemCount] = useState(0);
 
-  if (itemCount === 0) return null;
+  useEffect(() => {
+    // Безопасное получение количества товаров в корзине
+    if (isAuthenticated && user?.id) {
+      const userCart = allCartItems[user.id];
+      if (userCart && userCart.items && Array.isArray(userCart.items)) {
+        setItemCount(userCart.items.length);
+      } else {
+        setItemCount(0);
+      }
+    } else {
+      setItemCount(0);
+    }
+  }, [isAuthenticated, user?.id, allCartItems]);
+
+  // Если пользователь не авторизован, показываем только иконку без бейджа
+  if (!isAuthenticated) {
+    return (
+      <Link to="/login" className={styles.cartLink}>
+        <span className={styles.cartIcon}>🛒</span>
+      </Link>
+    );
+  }
 
   return (
-    <span className={styles.badge}>
-      +{itemCount}
-    </span>
+    <Link to="/cart" className={styles.cartLink}>
+      <div className={styles.cartWrapper}>
+        <span className={styles.cartIcon}>🛒</span>
+        {itemCount > 0 && (
+          <span className={styles.badgeCount}>{itemCount}</span>
+        )}
+      </div>
+    </Link>
   );
-};
+}
