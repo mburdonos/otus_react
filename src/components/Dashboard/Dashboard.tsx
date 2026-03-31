@@ -1,9 +1,15 @@
 import React from 'react';
 import { useAppSelector } from '../../store/hooks';
+import { useGetProfileQuery } from '../../services/authApi';
 import styles from './Dashboard.module.css';
 
 const Dashboard = () => {
-  const { user } = useAppSelector((state) => state.auth);
+  const { user, token } = useAppSelector((state) => state.auth);
+  const { data: profile, isLoading, error } = useGetProfileQuery(undefined, {
+    skip: !token, // Пропускаем запрос, если нет токена
+  });
+
+  const displayUser = profile || user;
 
   return (
     <div className={styles.container}>
@@ -11,12 +17,21 @@ const Dashboard = () => {
       <div className={styles.card}>
         <h3>Welcome to your Dashboard!</h3>
         <p>This is a protected page that only authenticated users can see.</p>
-        <div className={styles.infoCard}>
-          <h4>User Information:</h4>
-          <p><strong>Name:</strong> {user?.name}</p>
-          <p><strong>Email:</strong> {user?.email}</p>
-          <p><strong>User ID:</strong> {user?.id}</p>
-        </div>
+        
+        {isLoading && <p>Loading profile...</p>}
+        
+        {displayUser && (
+          <div className={styles.infoCard}>
+            <h4>User Information:</h4>
+            <p><strong>Name:</strong> {displayUser.name || 'Not set'}</p>
+            <p><strong>Email:</strong> {displayUser.email}</p>
+            <p><strong>User ID:</strong> {displayUser.id}</p>
+            <p><strong>Command ID:</strong> {displayUser.commandId}</p>
+            {displayUser.signUpDate && (
+              <p><strong>Member Since:</strong> {new Date(displayUser.signUpDate).toLocaleDateString()}</p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,58 +1,73 @@
+// store/authSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface AuthState {
-  isAuthenticated: boolean;
-  token: string | null;
-  user: User | null;
-}
 
 interface User {
   id: string;
   email: string;
   name: string;
+  commandId: string;
+  signUpDate?: Date;
+}
+
+interface AuthState {
+  isAuthenticated: boolean;
+  token: string | null;
+  user: User | null;
+  profile: any | null;
 }
 
 const initialState: AuthState = {
   isAuthenticated: false,
   token: localStorage.getItem('token'),
   user: null,
+  profile: null,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<{ token: string; user: User }>) => {
+    setCredentials: (state, action: PayloadAction<{ token: string; user?: User }>) => {
       state.isAuthenticated = true;
       state.token = action.payload.token;
-      state.user = action.payload.user;
+      if (action.payload.user) {
+        state.user = action.payload.user;
+      }
       localStorage.setItem('token', action.payload.token);
-      localStorage.setItem('user', JSON.stringify(action.payload.user));
+    },
+    setUser: (state, action: PayloadAction<User>) => {
+      state.user = action.payload;
+      state.profile = action.payload;
+      localStorage.setItem('user', JSON.stringify(action.payload));
     },
     logout: (state) => {
       state.isAuthenticated = false;
       state.token = null;
       state.user = null;
+      state.profile = null;
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      // Не удаляем корзину, она остается в localStorage
     },
     hydrateAuth: (state) => {
       const token = localStorage.getItem('token');
       const userStr = localStorage.getItem('user');
       
-      if (token && userStr) {
-        try {
-          const user = JSON.parse(userStr);
-          state.isAuthenticated = true;
-          state.token = token;
-          state.user = user;
-        } catch (error) {
-          console.error('Failed to parse user from localStorage', error);
+      if (token) {
+        state.isAuthenticated = true;
+        state.token = token;
+        if (userStr) {
+          try {
+            state.user = JSON.parse(userStr);
+            state.profile = JSON.parse(userStr);
+          } catch (error) {
+            console.error('Failed to parse user from localStorage', error);
+          }
         }
       }
     },
   },
 });
 
-export const { login, logout, hydrateAuth } = authSlice.actions;
+export const { setCredentials, setUser, logout, hydrateAuth } = authSlice.actions;
 export default authSlice.reducer;

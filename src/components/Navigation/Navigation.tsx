@@ -57,9 +57,17 @@ export function Navigation() {
                 </button>
               </>
             ) : (
+              <>
               <NavLink to="/login" className={styles.link}>
                 Login
               </NavLink>
+              <NavLink to="/signup" className={styles.link}>
+                Sign Up
+              </NavLink>
+              <NavLink to="/signup-rtk" className={styles.link}>
+                Sign Up RTK
+              </NavLink>
+              </>
             )}
     </nav>
   );

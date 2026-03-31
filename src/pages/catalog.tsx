@@ -1,107 +1,85 @@
+// pages/Catalog.tsx (исправленный с проверками)
 import React, { useState, useEffect, useRef } from 'react';
 import styles from '../pages_css/catalog.module.css';
-import axios from 'axios';
-import { useAppDispatch } from '../store/hooks';
-import { addToCart, updateProduct } from '../features/cart/cartSlice';
-import { Product } from '../features/cart/cartSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { addToCart, updateProduct, Product } from '../features/cart/cartSlice';
 import { staticProducts } from './products_data';
 import { createPortal } from 'react-dom';
 import EditProductModal from '../components/EditProductModal';
 import Modal from '../shared/ui/base_components/Modal/Modal';
 
 export function Catalog() {
-
-  // получаю статические данные продкутов, тк проблемы с блокировкой интернета
-  const [products, setProducts] = useState<Product[]>(staticProducts);
-  // если поулчать данные удалено изменить на true
-    const [loading, setLoading] = useState(false);
+  const [products, setProducts] = useState<Product[]>(staticProducts || []);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
   const dispatch = useAppDispatch();
+  const { user, isAuthenticated } = useAppSelector((state) => state.auth);
 
-
-  
-    const handleOpenModal = () => {
-      setIsModalOpen(true);
-    };
-  
-    const handleCloseModal = () => {
-      setIsModalOpen(false);
-    };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setEditingProduct(null);
+  };
 
   const portalRoot = useRef<HTMLDivElement>(null);
   
-    useEffect(() => {
-      const div = document.createElement('div');
-      div.id = 'modal-portal';
-      document.body.appendChild(div);
-      portalRoot.current = div;
-  
-      return () => {
-        if (portalRoot.current && document.body.contains(portalRoot.current)) {
-          document.body.removeChild(portalRoot.current);
-        }
-      };
-    }, []);
+  useEffect(() => {
+    const div = document.createElement('div');
+    div.id = 'modal-portal';
+    document.body.appendChild(div);
+    portalRoot.current = div;
 
-        useEffect(() => {
-      setProducts(products)
-    }, [products]);
+    return () => {
+      if (portalRoot.current && document.body.contains(portalRoot.current)) {
+        document.body.removeChild(portalRoot.current);
+      }
+    };
+  }, []);
 
-
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     try {
-  //       setLoading(true);
-  //       setError(null);
-
-  //       const response = await fetch('https://fakestoreapi.com/products');
-
-  //       if (!response.ok) {
-  //         throw new Error(`HTTP error! status: ${response.status}`);
-  //       }
-
-  //       const data: Product[] = await response.json();
-  //       setProducts(data);
-  //     } catch (err) {
-  //       if (err instanceof Error) {
-  //         setError(err.message);
-  //       } else {
-  //         setError('An unknown error occurred');
-  //       }
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchProducts();
-  // }, []);
-
+  // Функция добавления в корзину с проверкой авторизации
   const handleAddToCart = (product: Product) => {
-    dispatch(addToCart(product));
-    // alert(`${product.title} добавлен в корзину!`);
+    if (!isAuthenticated) {
+      alert('Пожалуйста, войдите в систему, чтобы добавить товары в корзину');
+      return;
+    }
+    
+    if (user?.id && product) {
+      dispatch(addToCart({ userId: user.id, product }));
+      alert(`${product.title} добавлен в корзину!`);
+    }
   };
 
   const handleEdit = (product: Product) => {
+    if (product) {
       setEditingProduct(product);
       setIsModalOpen(true);
-    };
+    }
+  };
 
-const handleSaveEdit = (updatedProduct: Product) => {
+  const handleSaveEdit = (updatedProduct: Product) => {
+    if (!updatedProduct) return;
+    
     console.log('Saving:', updatedProduct);
-    dispatch(updateProduct(updatedProduct));
+    
+    // Обновляем товар в каталоге
     setProducts(prev =>
       prev.map(p => p.id === updatedProduct.id ? updatedProduct : p)
     );
+    
+    // Если пользователь авторизован, обновляем товар в корзине
+    if (isAuthenticated && user?.id && updatedProduct) {
+      dispatch(updateProduct({ userId: user.id, product: updatedProduct }));
+    }
+    
     handleCloseModal();
   };
-  // const handleCloseModal = () => {
-  //   setIsModalOpen(false);
-  //   setEditingProduct(null);
-  // };  
 
+  // Проверка, что products существует и является массивом
+  if (!products || !Array.isArray(products)) {
+    return <div className={styles.error}>Ошибка загрузки товаров</div>;
+  }
 
   if (loading) {
     return <div className={styles.loading}>Загрузка продуктов...</div>;
@@ -129,32 +107,36 @@ const handleSaveEdit = (updatedProduct: Product) => {
                 <strong>Категория:</strong> {product.category}
               </p>
             </div>
-            <div>
-            <button onClick={() => handleAddToCart(product)}>В корзину</button>
-            </div>
-            <div>
-            <button onClick={() => handleEdit(product)}>Редактировать</button>
+            <div className={styles.buttonGroup}>
+              <button 
+                onClick={() => handleAddToCart(product)} 
+                className={styles.addToCartBtn}
+              >
+                В корзину
+              </button>
+              <button 
+                onClick={() => handleEdit(product)} 
+                className={styles.editBtn}
+              >
+                Редактировать
+              </button>
             </div>
           </div>
         ))}
       </div>
-      {isModalOpen && portalRoot.current && createPortal(
-        <div className={styles.container}>
-          <Modal
-            visible={true}
-            handleCloseModal={handleCloseModal}
-            children={
+      {isModalOpen && portalRoot.current && editingProduct && createPortal(
+        <Modal
+          visible={true}
+          handleCloseModal={handleCloseModal}
+        >
           <EditProductModal
             product={editingProduct}
             onSave={handleSaveEdit}
             onClose={handleCloseModal}
           />
-        }
-          />
-        </div>,
+        </Modal>,
         portalRoot.current
       )}
     </div>
-
   );
 }

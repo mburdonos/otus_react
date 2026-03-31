@@ -1,46 +1,57 @@
-// pages/LoginForm.tsx
+// pages/Signup.tsx
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAppDispatch } from '../../store/hooks';
-import { setCredentials, setUser } from '../../features/auth/authSlice';
-import { signin, getProfile, ApiErrorResponse } from '../../services/api';
-import styles from './LoginForm.module.css';
+import { useAppDispatch } from '../store/hooks';
+import { setCredentials, setUser } from '../features/auth/authSlice';
+import { signup, getProfile, COMMAND_ID, API_BASE_URL, ApiErrorResponse } from '../services/api';
+import styles from '../pages_css/Signup.module.css';
 
-const LoginForm = () => {
+const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
-  const [isLoading, setIsLoading] = useState(false);
+  
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setLoading(true);
+    setError(null);
     setFieldErrors({});
-    setIsLoading(true);
 
-    // Валидация
+    // Базовая валидация перед отправкой
     if (!email.trim()) {
       setFieldErrors({ email: ['Email is required'] });
-      setIsLoading(false);
+      setLoading(false);
       return;
     }
     
     if (!password.trim()) {
       setFieldErrors({ password: ['Password is required'] });
-      setIsLoading(false);
+      setLoading(false);
+      return;
+    }
+    
+    if (password.length < 6) {
+      setFieldErrors({ password: ['Password must be at least 6 characters'] });
+      setLoading(false);
       return;
     }
 
     try {
-      console.log('Attempting login with email:', email);
+      console.log('Attempting signup with commandId:', COMMAND_ID);
       
-      // 1. Авторизация
-      const authResult = await signin({ email: email.trim(), password });
+      // 1. Регистрация с commandId
+      const authResult = await signup({ 
+        email: email.trim(), 
+        password, 
+        commandId: COMMAND_ID 
+      });
       
-      console.log('Login successful, token received');
+      console.log('Signup successful, token received');
       
       // 2. Сохраняем токен
       dispatch(setCredentials({ token: authResult.token }));
@@ -62,32 +73,36 @@ const LoginForm = () => {
       // Перенаправляем на страницу каталога
       navigate('/catalog');
     } catch (err) {
-      console.error('Login error:', err);
+      console.error('Signup error:', err);
       
       const error = err as ApiErrorResponse;
       
-      if (error.errors && Array.isArray(error.errors)) {
-        setError(error.errors.join(', '));
-      } else if (error.errors && typeof error.errors === 'object') {
+      if (error.errors) {
         setFieldErrors(error.errors);
-        const firstError = Object.values(error.errors)[0];
-        if (firstError && Array.isArray(firstError)) {
-          setError(firstError[0]);
-        }
       } else if (error.message) {
-        setError(error.message);
+        const message = error.message.toLowerCase();
+        
+        if (message.includes('email') || message.includes('valid')) {
+          setFieldErrors({ email: [error.message] });
+        } else if (message.includes('password')) {
+          setFieldErrors({ password: [error.message] });
+        } else if (message.includes('already') || message.includes('exists')) {
+          setFieldErrors({ email: ['User with this email already exists'] });
+        } else {
+          setError(error.message);
+        }
       } else {
-        setError('Login failed. Please check your credentials and try again.');
+        setError('Registration failed. Please check your connection and try again.');
       }
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
-        <h2 className={styles.title}>Login</h2>
+        <h2 className={styles.title}>Sign Up</h2>
         
         {error && <div className={styles.error}>{error}</div>}
         
@@ -100,9 +115,9 @@ const LoginForm = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={`${styles.input} ${fieldErrors.email ? styles.inputError : ''}`}
-              placeholder="Enter your email"
-              disabled={isLoading}
-              required
+              placeholder="example@mail.com"
+              disabled={loading}
+              autoComplete="off"
             />
             {fieldErrors.email && (
               <div className={styles.fieldError}>
@@ -121,9 +136,9 @@ const LoginForm = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className={`${styles.input} ${fieldErrors.password ? styles.inputError : ''}`}
-              placeholder="Enter your password"
-              disabled={isLoading}
-              required
+              placeholder="Minimum 6 characters"
+              disabled={loading}
+              autoComplete="off"
             />
             {fieldErrors.password && (
               <div className={styles.fieldError}>
@@ -134,17 +149,17 @@ const LoginForm = () => {
             )}
           </div>
           
-          <button type="submit" className={styles.loginButton} disabled={isLoading}>
-            {isLoading ? 'Logging in...' : 'Login'}
+          <button type="submit" className={styles.submitButton} disabled={loading}>
+            {loading ? 'Creating account...' : 'Sign Up'}
           </button>
         </form>
         
-        <p className={styles.signupLink}>
-          Don't have an account? <Link to="/signup">Sign Up</Link>
+        <p className={styles.loginLink}>
+          Already have an account? <Link to="/login">Login</Link>
         </p>
       </div>
     </div>
   );
 };
 
-export default LoginForm;
+export default Signup;
