@@ -1,5 +1,6 @@
+// services/authApi.ts
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { COMMAND_ID } from './api';
+import { API_BASE_URL, COMMAND_ID } from './api';
 
 export interface SignupRequest {
   email: string;
@@ -24,25 +25,13 @@ export interface Profile {
   commandId: string;
 }
 
-export interface UpdateProfileRequest {
-  name: string;
-}
-
-export interface ChangePasswordRequest {
-  password: string;
-  newPassword: string;
-}
-
-export interface ChangePasswordResponse {
-  success: boolean;
-}
-
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://your-server.com/api', // Замените на реальный URL
+    baseUrl: API_BASE_URL,
     prepareHeaders: (headers, { getState }) => {
       headers.set('Content-Type', 'application/json');
+      headers.set('Accept', 'application/json');
       const token = (getState() as any).auth?.token;
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
@@ -59,9 +48,14 @@ export const authApi = createApi({
       }),
       transformErrorResponse: (response: { status: number; data: any }) => {
         if (response.data?.message) {
-          return response.data.message;
+          return {
+            data: response.data,
+            message: response.data.message,
+          };
         }
-        return 'Registration failed';
+        return {
+          message: 'Registration failed',
+        };
       },
     }),
     
@@ -73,38 +67,25 @@ export const authApi = createApi({
       }),
       transformErrorResponse: (response: { status: number; data: any }) => {
         if (response.data?.message) {
-          return response.data.message;
+          return {
+            data: response.data,
+            message: response.data.message,
+          };
         }
-        return 'Login failed';
+        return {
+          message: 'Login failed',
+        };
       },
     }),
     
     getProfile: builder.query<Profile, void>({
       query: () => '/profile',
     }),
-    
-    updateProfile: builder.mutation<Profile, UpdateProfileRequest>({
-      query: (data) => ({
-        url: '/profile',
-        method: 'PATCH',
-        body: data,
-      }),
-    }),
-    
-    changePassword: builder.mutation<ChangePasswordResponse, ChangePasswordRequest>({
-      query: (data) => ({
-        url: '/profile/change-password',
-        method: 'POST',
-        body: data,
-      }),
-    }),
   }),
 });
 
-export const {
-  useSignupMutation,
-  useSigninMutation,
-  useGetProfileQuery,
-  useUpdateProfileMutation,
-  useChangePasswordMutation,
+export const { 
+  useSignupMutation, 
+  useSigninMutation, 
+  useGetProfileQuery 
 } = authApi;
