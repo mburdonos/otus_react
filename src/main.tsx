@@ -11,11 +11,9 @@ import i18n from './i18n'; // Инициализация i18n
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider>
-      <LanguageProvider>
         <Provider store={store}>
     <App />
     </Provider>
-    </LanguageProvider>
     </ThemeProvider>
   </StrictMode>,
 )

@@ -23,7 +23,6 @@ export function Routing() {
         <Route path="/otus_react" element={<Home />} />
           <Route path="/login" element={<LoginForm />} />
                     <Route path="/signup" element={<Signup />} />
-          <Route path="/signup-rtk" element={<SignupRTK />} />
 
           <Route element={<ProtectedRoute />}>
                     <Route
