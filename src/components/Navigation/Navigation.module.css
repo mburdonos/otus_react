@@ -14,8 +14,9 @@
 }
 
 .rightSection {
+  padding-right: 50px;
   display: flex;
-  gap: 15px;
+  gap: 50px;
   align-items: center;
 }
 

@@ -37,7 +37,13 @@ export function Navigation() {
             >
               catalog
             </NavLink>
-            <NavLink
+
+          </>
+        )}
+      </div>
+
+      <div className={styles.rightSection}>
+                    <NavLink
               to="/otus_react/cart"
               className={({ isActive }) =>
                 isActive ? styles['active-link'] : styles['nav-link']
@@ -48,11 +54,6 @@ export function Navigation() {
                 <CartBadge />
               </span>
             </NavLink>
-          </>
-        )}
-      </div>
-
-      <div className={styles.rightSection}>
         {isAuthenticated ? (
           <>
             <span className={styles.userInfo}>Welcome, {user?.name}</span>
