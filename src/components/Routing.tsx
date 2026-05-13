@@ -24,7 +24,8 @@ export function Routing() {
           <Route path="/login" element={<LoginForm />} />
                     <Route path="/signup" element={<Signup />} />
 
-          <Route element={<ProtectedRoute />}>
+{/* TODO добавить когда починят apie */}
+          {/* <Route element={<ProtectedRoute />}> */}
                     <Route
           path="/otus_react/catalog"
           element={<Catalog />}
@@ -35,7 +36,7 @@ export function Routing() {
               <Cart />
           }
         />
-          </Route>
+          {/* </Route> */}
       </Routes>
   );
 }

@@ -26,8 +26,8 @@ export function Navigation() {
         >
           home
         </NavLink>
-
-        {isAuthenticated && (
+          {/* TODO убрать отрицание на isAuthenticated, когда будет авторизация */}
+        {!isAuthenticated && (
           <>
             <NavLink
               to="/otus_react/catalog"
