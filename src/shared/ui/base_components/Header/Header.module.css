@@ -23,20 +23,20 @@
   padding: 12px 24px;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  /* background-color: #647a9a; */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(10px);
 }
 
 .information {
-  display: inline-flex;
-    gap: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
 }
 
 .navigation {
+  flex: 1;
   display: flex;
-  gap: 2rem; /* промежуток между элементами */
-  align-items: center;
 }
 
 .logoWrapper {
@@ -45,20 +45,7 @@
 
 .title {
   margin: 20px;
-  /* color: #ffffff; */
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.2;
-}
-
-/* Адаптивность: отступы на мобильных */
-@media (max-width: 768px) {
-  .header {
-    padding: 0px;
-    gap: 12px;
-  }
-
-  .title {
-    font-size: 1.1rem;
-  }
 }

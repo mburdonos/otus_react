@@ -1,6 +1,20 @@
 .navigation {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+}
+
+.leftSection {
+  display: flex;
   gap: 20px;
+  align-items: center;
+}
+
+.rightSection {
+  display: flex;
+  gap: 15px;
   align-items: center;
 }
 
@@ -16,17 +30,40 @@
   color: #007bff;
   font-weight: bold;
 }
+
 .cartLink {
   display: flex;
   align-items: center;
-  gap: 6px; /* Отступ между текстом и бейджем */
+  gap: 6px;
 }
 
+.userInfo {
+  color: #666;
+  font-size: 14px;
+}
 
-@media (max-width: 768px) {
-  .navigation {
-    gap: 1rem;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+.logoutButton {
+  padding: 6px 12px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logoutButton:hover {
+  background-color: #c82333;
+}
+
+.link {
+  text-decoration: none;
+  color: #007bff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: color 0.3s;
+}
+
+.link:hover {
+  color: #0056b3;
 }
