@@ -6,7 +6,21 @@ import type { Product } from '../features/cart/cartSlice';
 import styles from '../pages_css/сart.module.css'
 
 export function Cart() {
-  const { user, isAuthenticated } = useAppSelector((state) => state.auth);
+
+    // TODO раскоментировать когда будет готова авторизация
+  // const { user, isAuthenticated } = useAppSelector((state) => state.auth);
+  // TODO удалить после реализации авторизации
+  const user = {
+  id: "1",
+  email: "test@gmail.com",
+  name: "test",
+  commandId: "bmp"
+};
+const isAuthenticated = true;
+
+
+
+
   const allCartItems = useAppSelector(state => state.cart);
   const dispatch = useAppDispatch();
 
