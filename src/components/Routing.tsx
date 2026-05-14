@@ -20,18 +20,18 @@ export function Routing() {
 
   return (
       <Routes>
-        <Route path="/otus_react" element={<Home />} />
+        <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginForm />} />
                     <Route path="/signup" element={<Signup />} />
 
 {/* TODO добавить когда починят apie */}
           {/* <Route element={<ProtectedRoute />}> */}
                     <Route
-          path="/otus_react/catalog"
+          path="/catalog"
           element={<Catalog />}
         />
                 <Route
-          path="/otus_react/cart"
+          path="/cart"
           element={
               <Cart />
           }

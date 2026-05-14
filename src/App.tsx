@@ -12,7 +12,7 @@ function App() {
 
   return (
     <>
-    <BrowserRouter>
+    <BrowserRouter basename="/otus_react">
       <div>
         <Header title="shop" children={<Navigation />} />
         <main>

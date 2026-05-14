@@ -1,71 +1,291 @@
+/* Navigation.css или компонент навигации - СОВРЕМЕННЫЙ СТИЛЬ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
+
+/* Переменные для навигации (берутся из глобальных или свои) */
+[data-theme='light'] {
+  --nav-bg: transparent;
+  --nav-text: #0f172a;
+  --nav-text-hover: #ffffff;
+  --nav-border: rgba(59, 130, 246, 0.15);
+  --nav-gradient-start: #3b82f6;
+  --nav-gradient-end: #8b5cf6;
+  --nav-active-bg: rgba(59, 130, 246, 0.1);
+  --nav-user-color: #64748b;
+  --nav-logout-bg: #ef4444;
+  --nav-logout-hover: #dc2626;
+}
+
+[data-theme='dark'] {
+  --nav-bg: transparent;
+  --nav-text: #e2e8f0;
+  --nav-text-hover: #ffffff;
+  --nav-border: rgba(96, 165, 250, 0.2);
+  --nav-gradient-start: #60a5fa;
+  --nav-gradient-end: #c084fc;
+  --nav-active-bg: rgba(96, 165, 250, 0.15);
+  --nav-user-color: #94a3b8;
+  --nav-logout-bg: #ef4444;
+  --nav-logout-hover: #dc2626;
+}
+
 .navigation {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 30px;
   width: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .leftSection {
-  padding-left  : 50px;
+  padding-left: 50px;
   display: flex;
-  gap: 50px;
+  gap: 40px;
   align-items: center;
 }
 
 .rightSection {
   padding-right: 50px;
   display: flex;
-  gap: 50px;
+  gap: 40px;
   align-items: center;
 }
 
+/* Современные ссылки навигации */
 .nav-link {
   text-decoration: none;
-  color: #333;
-  padding: 8px 16px;
-  border-radius: 4px;
-  transition: color 0.3s;
+  color: var(--nav-text);
+  padding: 8px 20px;
+  border-radius: 40px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  position: relative;
+  cursor: pointer;
 }
 
+.nav-link:hover {
+  background: linear-gradient(135deg, var(--nav-gradient-start), var(--nav-gradient-end));
+  color: var(--nav-text-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Легкий фон при нажатии */
+.nav-link:active {
+  transform: translateY(0);
+  background: var(--nav-active-bg);
+  color: var(--nav-text);
+  box-shadow: none;
+}
+
+/* Активная ссылка */
 .active-link {
-  color: #007bff;
-  font-weight: bold;
+  background: linear-gradient(135deg, var(--nav-gradient-start), var(--nav-gradient-end));
+  color: white;
+  font-weight: 600;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
 }
 
+.active-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
+}
+
+.active-link:active {
+  transform: translateY(0);
+  background: var(--nav-active-bg);
+  color: var(--nav-gradient-start);
+}
+
+/* Ссылка корзины */
 .cartLink {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  position: relative;
 }
 
+/* Бейдж для корзины (если есть количество товаров) */
+.cartLink::after {
+  display: none; /* Уберите display:none если хотите показывать счетчик */
+}
+
+/* Иконка корзины через псевдоэлемент */
+.cartLink::before {
+  content: '🛒';
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.cartLink:hover::before {
+  transform: scale(1.1);
+}
+
+/* Информация о пользователе */
 .userInfo {
-  color: #666;
-  font-size: 14px;
+  color: var(--nav-user-color);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  background: var(--nav-active-bg);
+  border-radius: 40px;
+  backdrop-filter: blur(4px);
+  letter-spacing: 0.01em;
 }
 
+/* Кнопка выхода */
 .logoutButton {
-  padding: 6px 12px;
-  background-color: #dc3545;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, var(--nav-logout-bg), #b91c1c);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 40px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
 }
 
 .logoutButton:hover {
-  background-color: #c82333;
+  background: linear-gradient(135deg, #dc2626, #991b1b);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
+.logoutButton:active {
+  transform: translateY(0);
+  background: var(--nav-active-bg);
+  color: var(--nav-logout-bg);
+  box-shadow: none;
+}
+
+/* Обычные ссылки (для login/register) */
 .link {
   text-decoration: none;
-  color: #007bff;
-  padding: 6px 12px;
-  border-radius: 4px;
-  transition: color 0.3s;
+  padding: 8px 20px;
+  border-radius: 40px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--nav-text);
+  background: transparent;
+  border: 1px solid var(--nav-border);
 }
 
 .link:hover {
-  color: #0056b3;
+  background: linear-gradient(135deg, var(--nav-gradient-start), var(--nav-gradient-end));
+  color: white;
+  transform: translateY(-2px);
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.link:active {
+  transform: translateY(0);
+  background: var(--nav-active-bg);
+  color: var(--nav-text);
+  border-color: var(--nav-border);
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+  .leftSection {
+    padding-left: 20px;
+    gap: 20px;
+  }
+  
+  .rightSection {
+    padding-right: 20px;
+    gap: 20px;
+  }
+  
+  .nav-link, .link {
+    padding: 6px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navigation {
+    gap: 15px;
+  }
+  
+  .leftSection {
+    padding-left: 10px;
+    gap: 12px;
+  }
+  
+  .rightSection {
+    padding-right: 10px;
+    gap: 12px;
+  }
+  
+  .nav-link, .link {
+    padding: 5px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .userInfo {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+  }
+  
+  .logoutButton {
+    padding: 6px 16px;
+    font-size: 0.85rem;
+  }
+  
+  .cartLink::before {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .leftSection {
+    gap: 8px;
+  }
+  
+  .rightSection {
+    gap: 8px;
+  }
+  
+  .nav-link, .link {
+    padding: 4px 10px;
+    font-size: 0.8rem;
+  }
+  
+  .userInfo {
+    display: none; /* Скрываем на очень маленьких экранах */
+  }
+  
+  .cartLink span {
+    display: none; /* Скрываем текст корзины, оставляем иконку */
+  }
+  
+  .cartLink::before {
+    font-size: 1.2rem;
+  }
+}
+
+/* Анимация появления элементов навигации */
+@keyframes fadeInNav {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-link, .link, .logoutButton, .userInfo {
+  animation: fadeInNav 0.3s ease forwards;
 }

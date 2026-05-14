@@ -16,44 +16,45 @@ export function Navigation() {
 
   return (
     <nav className={styles.navigation}>
-
       <div className={styles.leftSection}>
         <NavLink
-          to="/otus_react/"
+          to="/"
           className={({ isActive }) =>
             isActive ? styles['active-link'] : styles['nav-link']
           }
+          end // ВАЖНО: Добавьте этот пропс!
         >
           home
         </NavLink>
-          {/* TODO убрать отрицание на isAuthenticated, когда будет авторизация */}
+        
+        {/* TODO убрать отрицание на isAuthenticated, когда будет авторизация */}
         {!isAuthenticated && (
           <>
             <NavLink
-              to="/otus_react/catalog"
+              to="/catalog"
               className={({ isActive }) =>
                 isActive ? styles['active-link'] : styles['nav-link']
               }
             >
               catalog
             </NavLink>
-
           </>
         )}
       </div>
 
       <div className={styles.rightSection}>
-                    <NavLink
-              to="/otus_react/cart"
-              className={({ isActive }) =>
-                isActive ? styles['active-link'] : styles['nav-link']
-              }
-            >
-              <span className={styles.cartLink}>
-                cart
-                <CartBadge />
-              </span>
-            </NavLink>
+        <NavLink
+          to="/cart"
+          className={({ isActive }) =>
+            isActive ? styles['active-link'] : styles['nav-link']
+          }
+        >
+          <span className={styles.cartLink}>
+            cart
+            <CartBadge />
+          </span>
+        </NavLink>
+        
         {isAuthenticated ? (
           <>
             <span className={styles.userInfo}>Welcome, {user?.name}</span>

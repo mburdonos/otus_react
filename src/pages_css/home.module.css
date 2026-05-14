@@ -1,89 +1,325 @@
+/* pages_css/home.module.css - СОВРЕМЕННЫЙ СТИЛЬ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
+
+/* Переменные для темы */
+[data-theme='light'] {
+  --home-bg-start: #f8fafc;
+  --home-bg-end: #f1f5f9;
+  --home-hero-start: #3b82f6;
+  --home-hero-end: #8b5cf6;
+  --home-card-bg: #ffffff;
+  --home-text-primary: #0f172a;
+  --home-text-secondary: #64748b;
+  --home-border: #e2e8f0;
+  --home-accent: #3b82f6;
+  --home-success: #10b981;
+}
+
+[data-theme='dark'] {
+  --home-bg-start: #0f0f1a;
+  --home-bg-end: #1a1a2e;
+  --home-hero-start: #60a5fa;
+  --home-hero-end: #c084fc;
+  --home-card-bg: rgba(26, 26, 46, 0.85);
+  --home-text-primary: #e2e8f0;
+  --home-text-secondary: #94a3b8;
+  --home-border: rgba(96, 165, 250, 0.15);
+  --home-accent: #60a5fa;
+  --home-success: #34d399;
+}
+
+.home_block {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--home-bg-start), var(--home-bg-end));
+}
+
+/* Hero контейнер */
 .home-container {
-    margin-top: 70px;
   text-align: center;
-  padding: 40px 20px;
-  background: linear-gradient(135deg, #4a6fa5 0%, #2c3e50 100%);
+  padding: 60px 20px;
+  background: linear-gradient(135deg, var(--home-hero-start), var(--home-hero-end));
   color: white;
-  border-radius: 12px;
-  margin-bottom: 40px;
+  border-radius: 0 0 40px 40px;
+  margin-bottom: 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .home-container h1 {
-  font-size: 2.8rem;
-  margin: 0 0 15px 0;
-  font-weight: 700;
+  font-size: 3rem;
+  margin: 0 0 20px 0;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, #ffffff, rgba(255,255,255,0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .tagline {
-  font-size: 1.3rem;
-  opacity: 0.9;
+  font-size: 1.2rem;
+  opacity: 0.95;
   margin: 0;
+  position: relative;
+  z-index: 1;
+  font-weight: 500;
 }
 
+/* Контент */
 .home-content {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 20px 60px;
 }
 
+/* Секции */
 .about-section,
 .values-section,
 .call-to-action {
-  background: #ffffff;
-  padding: 35px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  background: var(--home-card-bg);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
+  border: 1px solid var(--home-border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-section:hover,
+.values-section:hover,
+.call-to-action:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.15);
 }
 
 .about-section h2,
 .values-section h2,
 .call-to-action h2 {
-  color: #2c3e50;
+  background: linear-gradient(135deg, var(--home-hero-start), var(--home-hero-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   font-size: 1.8rem;
-  border-bottom: 2px solid #4a6fa5;
-  padding-bottom: 10px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  border-bottom: 2px solid var(--home-border);
+  padding-bottom: 15px;
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
+.about-section p,
+.call-to-action p {
+  color: var(--home-text-secondary);
+  line-height: 1.6;
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+/* Список преимуществ */
 .advantages-list {
   list-style: none;
   padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
 }
 
 .advantages-list li {
-  padding: 12px 0;
-  padding-left: 30px;
+  padding: 16px 20px;
+  padding-left: 50px;
   position: relative;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--home-text-primary);
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.advantages-list li:hover {
+  background: rgba(59, 130, 246, 0.1);
+  transform: translateX(5px);
 }
 
 .advantages-list li:before {
   content: '✓';
-  color: #27ae60;
+  color: var(--home-success);
   font-weight: bold;
+  font-size: 1.2rem;
   position: absolute;
-  left: 0;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
+/* CTA кнопка */
 .cta-button {
-  background: #4a6fa5;
+  background: linear-gradient(135deg, var(--home-hero-start), var(--home-hero-end));
   color: white;
   border: none;
-  padding: 16px 40px;
-  font-size: 1.2rem;
+  padding: 14px 40px;
+  font-size: 1rem;
   font-weight: 600;
-  border-radius: 8px;
+  border-radius: 40px;
   cursor: pointer;
   transition: all 0.3s ease;
   display: block;
   width: fit-content;
   margin: 25px auto 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.cta-button:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .cta-button:hover {
-  background: #3a5a80;
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(74, 111, 165, 0.2);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
 }
+
+.cta-button:active {
+  transform: translateY(0);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .home_block {
+    margin-top: 70px;
+  }
+  
+  .home-container {
+    padding: 40px 20px;
+    border-radius: 0 0 30px 30px;
+  }
+  
+  .home-container h1 {
+    font-size: 2rem;
+  }
+  
+  .tagline {
+    font-size: 1rem;
+  }
+  
+  .about-section,
+  .values-section,
+  .call-to-action {
+    padding: 25px;
+  }
+  
+  .about-section h2,
+  .values-section h2,
+  .call-to-action h2 {
+    font-size: 1.5rem;
+  }
+  
+  .advantages-list {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .advantages-list li {
+    padding: 12px 16px;
+    padding-left: 45px;
+    font-size: 0.9rem;
+  }
+  
+  .cta-button {
+    padding: 12px 32px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container h1 {
+    font-size: 1.5rem;
+  }
+  
+  .tagline {
+    font-size: 0.9rem;
+  }
+  
+  .home-content {
+    padding: 0 15px 40px;
+  }
+  
+  .about-section,
+  .values-section,
+  .call-to-action {
+    padding: 20px;
+  }
+  
+  .about-section h2,
+  .values-section h2,
+  .call-to-action h2 {
+    font-size: 1.3rem;
+  }
+  
+  .about-section p,
+  .call-to-action p {
+    font-size: 0.9rem;
+  }
+  
+  .cta-button {
+    padding: 10px 24px;
+    font-size: 0.85rem;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Анимация появления */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-container,
+.about-section,
+.values-section,
+.call-to-action {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.about-section { animation-delay: 0.1s; }
+.values-section { animation-delay: 0.2s; }
+.call-to-action { animation-delay: 0.3s; }

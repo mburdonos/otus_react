@@ -1,23 +1,101 @@
+/* Logo.module.css - Альтернативный вариант без декоративного элемента */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
+
+[data-theme='light'] {
+  --logo-gradient-start: #3b82f6;
+  --logo-gradient-end: #8b5cf6;
+  --logo-text-shadow: rgba(59, 130, 246, 0.2);
+  --logo-hover-glow: rgba(59, 130, 246, 0.3);
+}
+
+[data-theme='dark'] {
+  --logo-gradient-start: #60a5fa;
+  --logo-gradient-end: #c084fc;
+  --logo-text-shadow: rgba(96, 165, 250, 0.3);
+  --logo-hover-glow: rgba(96, 165, 250, 0.4);
+}
+
 .logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: #4a6fa5;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-}
-
-.logo:hover {
-  transform: scale(1.05);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-decoration: none;
 }
 
 .logoText {
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 0.6rem;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-};
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  padding: 4px 0;
+  transition: all 0.3s ease;
+}
+
+/* Анимированное подчеркивание */
+.logoText::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-end));
+  transition: width 0.3s ease;
+  border-radius: 3px;
+}
+
+/* Hover эффекты */
+.logo:hover {
+  transform: translateY(-2px);
+}
+
+.logo:hover .logoText::after {
+  width: 100%;
+}
+
+.logo:hover .logoText {
+  text-shadow: 0 0 20px var(--logo-hover-glow);
+}
+
+/* Active эффект */
+.logo:active {
+  transform: translateY(0);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .logoText {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logoText {
+    font-size: 1.2rem;
+  }
+}
+
+/* Анимация появления */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.logo {
+  animation: fadeInScale 0.3s ease forwards;
+}
