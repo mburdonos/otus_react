@@ -106,11 +106,13 @@ const isAuthenticated = true;
       <div className={styles.productsGrid}>
         {products.map((product) => (
           <div key={product.id} className={styles.productCard}>
+          <div className={styles.imageWrapper}>
             <img
               src={product.image}
               alt={product.title}
               className={styles.productImage}
             />
+            </div>
             <div className={styles.productInfo}>
               <h3 className={styles.productTitle}>{product.title}</h3>
               <p className={styles.productPrice}>${product.price.toFixed(2)}</p>
