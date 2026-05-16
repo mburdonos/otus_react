@@ -16,16 +16,8 @@ export function Catalog() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   const dispatch = useAppDispatch();
-  // TODO раскоментировать когда будет готова авторизация
-  // const { user, isAuthenticated } = useAppSelector((state) => state.auth);
-  // TODO удалить после реализации авторизации
-  const user = {
-  id: "1",
-  email: "test@gmail.com",
-  name: "test",
-  commandId: "bmp"
-};
-const isAuthenticated = true;
+  const { user, isAuthenticated } = useAppSelector((state) => state.auth);
+
 
 
 

@@ -7,19 +7,8 @@ import styles from '../pages_css/сart.module.css'
 
 export function Cart() {
 
-    // TODO раскоментировать когда будет готова авторизация
-  // const { user, isAuthenticated } = useAppSelector((state) => state.auth);
-  // TODO удалить после реализации авторизации
-  const user = {
-  id: "1",
-  email: "test@gmail.com",
-  name: "test",
-  commandId: "bmp"
-};
-const isAuthenticated = true;
 
-
-
+  const { user, isAuthenticated } = useAppSelector((state) => state.auth);
 
   const allCartItems = useAppSelector(state => state.cart);
   const dispatch = useAppDispatch();

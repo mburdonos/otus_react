@@ -27,8 +27,7 @@ export function Navigation() {
           home
         </NavLink>
         
-        {/* TODO убрать отрицание на isAuthenticated, когда будет авторизация */}
-        {!isAuthenticated && (
+        {isAuthenticated && (
           <>
             <NavLink
               to="/catalog"

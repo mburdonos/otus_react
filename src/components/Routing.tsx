@@ -24,8 +24,7 @@ export function Routing() {
           <Route path="/login" element={<LoginForm />} />
                     <Route path="/signup" element={<Signup />} />
 
-{/* TODO добавить когда починят apie */}
-          {/* <Route element={<ProtectedRoute />}> */}
+          <Route element={<ProtectedRoute />}>
                     <Route
           path="/catalog"
           element={<Catalog />}
@@ -36,7 +35,7 @@ export function Routing() {
               <Cart />
           }
         />
-          {/* </Route> */}
+          </Route>
       </Routes>
   );
 }

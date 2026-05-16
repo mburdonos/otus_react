@@ -5,16 +5,14 @@ import { Link } from 'react-router-dom';
 import styles from './CartBadge.module.css';
 
 export function CartBadge() {
-      // TODO раскоментировать когда будет готова авторизация
-  //   const { user, isAuthenticated } = useAppSelector((state) => state.auth);
-  // TODO удалить после реализации авторизации
-  const user = {
-  id: "1",
-  email: "test@gmail.com",
-  name: "test",
-  commandId: "bmp"
-};
-const isAuthenticated = true;
+  const { user, isAuthenticated } = useAppSelector((state) => state.auth);
+//   const user = {
+//   id: "1",
+//   email: "test@gmail.com",
+//   name: "test",
+//   commandId: "bmp"
+// };
+// const isAuthenticated = true;
 
 
   const allCartItems = useAppSelector(state => state.cart);
