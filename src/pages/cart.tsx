@@ -6,7 +6,10 @@ import type { Product } from '../features/cart/cartSlice';
 import styles from '../pages_css/сart.module.css'
 
 export function Cart() {
+
+
   const { user, isAuthenticated } = useAppSelector((state) => state.auth);
+
   const allCartItems = useAppSelector(state => state.cart);
   const dispatch = useAppDispatch();
 

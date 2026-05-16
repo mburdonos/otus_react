@@ -8,7 +8,7 @@ export function Home() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/otus_react/catalog'); // переход на /new-route
+    navigate('/catalog'); // переход на /new-route
   };
 
   return (

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -58,6 +58,7 @@
     "jest-environment-jsdom": "^30.2.0",
     "jsdom": "^28.1.0",
     "playwright": "^1.57.0",
+    "prettier": "^3.8.3",
     "sass": "^1.97.3",
     "sass-embedded": "^1.97.3",
     "ts-jest": "^29.4.6",

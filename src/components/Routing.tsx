@@ -8,7 +8,6 @@ import { Cart } from '../pages/cart';
 import LoginForm from './LoginForm/LoginForm';
 import ProtectedRoute from './ProtectRoute';
 import Signup from '../pages/Signup';
-import SignupRTK from '../pages/SignupRTK';
 
 export function Routing() {
 
@@ -20,17 +19,17 @@ export function Routing() {
 
   return (
       <Routes>
-        <Route path="/otus_react" element={<Home />} />
+        <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginForm />} />
                     <Route path="/signup" element={<Signup />} />
 
           <Route element={<ProtectedRoute />}>
                     <Route
-          path="/otus_react/catalog"
+          path="/catalog"
           element={<Catalog />}
         />
                 <Route
-          path="/otus_react/cart"
+          path="/cart"
           element={
               <Cart />
           }

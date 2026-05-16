@@ -1,5 +1,5 @@
 export const API_BASE_URL = 'https://19429ba06ff2.vps.myjino.ru/api';
-export const COMMAND_ID = 'bmp'; // Замените на ваш реальный commandId
+export const COMMAND_ID = 'bmp';
 
 // Типы для API
 export interface SignUpBody {
@@ -58,7 +58,7 @@ const handleResponse = async (response: Response) => {
   
   if (!response.ok) {
     const error: ApiErrorResponse = {
-      message: data.message || data.error || `HTTP error ${response.status}`,
+      message: `HTTP error ${response.status}`,
       errors: data.errors,
       statusCode: response.status,
     };

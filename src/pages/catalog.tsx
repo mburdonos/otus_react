@@ -9,14 +9,42 @@ import EditProductModal from '../components/EditProductModal';
 import Modal from '../shared/ui/base_components/Modal/Modal';
 
 export function Catalog() {
-  const [products, setProducts] = useState<Product[]>(staticProducts || []);
-  const [loading, setLoading] = useState(false);
+  // staticProducts || 
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+      const fetchProducts = async () => {
+        try {
+          setLoading(true);
+          setError(null);
+          const response = await fetch('https://fakestoreapi.com/products');
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data: Product[] = await response.json();
+          setProducts(data);
+        } catch (err) {
+          if (err instanceof Error) {
+            setError(err.message);
+          } else {
+            setError('An unknown error occurred');
+          }
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchProducts();
+    }, []);
   
   const dispatch = useAppDispatch();
   const { user, isAuthenticated } = useAppSelector((state) => state.auth);
+
+
+
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -38,7 +66,6 @@ export function Catalog() {
     };
   }, []);
 
-  // Функция добавления в корзину с проверкой авторизации
   const handleAddToCart = (product: Product) => {
     if (!isAuthenticated) {
       alert('Пожалуйста, войдите в систему, чтобы добавить товары в корзину');
@@ -63,7 +90,6 @@ export function Catalog() {
     
     console.log('Saving:', updatedProduct);
     
-    // Обновляем товар в каталоге
     setProducts(prev =>
       prev.map(p => p.id === updatedProduct.id ? updatedProduct : p)
     );
@@ -95,11 +121,13 @@ export function Catalog() {
       <div className={styles.productsGrid}>
         {products.map((product) => (
           <div key={product.id} className={styles.productCard}>
+          <div className={styles.imageWrapper}>
             <img
               src={product.image}
               alt={product.title}
               className={styles.productImage}
             />
+            </div>
             <div className={styles.productInfo}>
               <h3 className={styles.productTitle}>{product.title}</h3>
               <p className={styles.productPrice}>${product.price.toFixed(2)}</p>
