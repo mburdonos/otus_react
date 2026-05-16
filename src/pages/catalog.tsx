@@ -9,36 +9,36 @@ import EditProductModal from '../components/EditProductModal';
 import Modal from '../shared/ui/base_components/Modal/Modal';
 
 export function Catalog() {
-  // staticProducts || 
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>(staticProducts || []);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-      const fetchProducts = async () => {
-        try {
-          setLoading(true);
-          setError(null);
-          const response = await fetch('https://fakestoreapi.com/products');
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          const data: Product[] = await response.json();
-          setProducts(data);
-        } catch (err) {
-          if (err instanceof Error) {
-            setError(err.message);
-          } else {
-            setError('An unknown error occurred');
-          }
-        } finally {
-          setLoading(false);
-        }
-      };
-      fetchProducts();
-    }, []);
+  // Закоментировал, тк долго отдает данные
+  // useEffect(() => {
+  //     const fetchProducts = async () => {
+  //       try {
+  //         setLoading(true);
+  //         setError(null);
+  //         const response = await fetch('https://fakestoreapi.com/products');
+  //         if (!response.ok) {
+  //           throw new Error(`HTTP error! status: ${response.status}`);
+  //         }
+  //         const data: Product[] = await response.json();
+  //         setProducts(data);
+  //       } catch (err) {
+  //         if (err instanceof Error) {
+  //           setError(err.message);
+  //         } else {
+  //           setError('An unknown error occurred');
+  //         }
+  //       } finally {
+  //         setLoading(false);
+  //       }
+  //     };
+  //     fetchProducts();
+  //   }, []);
   
   const dispatch = useAppDispatch();
   const { user, isAuthenticated } = useAppSelector((state) => state.auth);
