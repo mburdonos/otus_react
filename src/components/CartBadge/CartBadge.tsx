@@ -6,14 +6,6 @@ import styles from './CartBadge.module.css';
 
 export function CartBadge() {
   const { user, isAuthenticated } = useAppSelector((state) => state.auth);
-//   const user = {
-//   id: "1",
-//   email: "test@gmail.com",
-//   name: "test",
-//   commandId: "bmp"
-// };
-// const isAuthenticated = true;
-
 
   const allCartItems = useAppSelector(state => state.cart);
   const [itemCount, setItemCount] = useState(0);
@@ -32,11 +24,9 @@ export function CartBadge() {
     }
   }, [isAuthenticated, user?.id, allCartItems]);
 
-  // Если пользователь не авторизован, показываем только иконку без бейджа
   if (!isAuthenticated) {
     return (
       <Link to="/login" className={styles.cartLink}>
-        <span className={styles.cartIcon}>🛒</span>
       </Link>
     );
   }
@@ -44,7 +34,6 @@ export function CartBadge() {
   return (
     <Link to="/cart" className={styles.cartLink}>
       <div className={styles.cartWrapper}>
-        <span className={styles.cartIcon}>🛒</span>
         {itemCount > 0 && (
           <span className={styles.badgeCount}>{itemCount}</span>
         )}

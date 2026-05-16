@@ -22,7 +22,7 @@ export function Navigation() {
           className={({ isActive }) =>
             isActive ? styles['active-link'] : styles['nav-link']
           }
-          end // ВАЖНО: Добавьте этот пропс!
+          end 
         >
           home
         </NavLink>

@@ -8,7 +8,6 @@ import { Cart } from '../pages/cart';
 import LoginForm from './LoginForm/LoginForm';
 import ProtectedRoute from './ProtectRoute';
 import Signup from '../pages/Signup';
-import SignupRTK from '../pages/SignupRTK';
 
 export function Routing() {
 

@@ -1,7 +1,7 @@
 .badge {
-  background-color: #ff4444; /* Красный фон */
-  color: white; /* Белый текст */
-  border-radius: 50%; /* Круглая форма */
+  background-color: #ff4444;
+  color: white;
+  border-radius: 50%;
   width: 24px;
   height: 24px;
   display: flex;
@@ -9,6 +9,6 @@
   justify-content: center;
   font-size: 12px;
   font-weight: bold;
-  margin-left: 8px; /* Отступ от текста Cart */
+  margin-left: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }

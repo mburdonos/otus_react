@@ -58,7 +58,7 @@ const handleResponse = async (response: Response) => {
   
   if (!response.ok) {
     const error: ApiErrorResponse = {
-      message: data.message || data.error || `HTTP error ${response.status}`,
+      message: `HTTP error ${response.status}`,
       errors: data.errors,
       statusCode: response.status,
     };
