@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from '../pages_css/catalog.module.css';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { addToCart, updateProduct, Product } from '../features/cart/cartSlice';
+import { addToCart, removeFromCart, updateProduct, Product } from '../features/cart/cartSlice';
 import { staticProducts } from './products_data';
 import { createPortal } from 'react-dom';
 import EditProductModal from '../components/EditProductModal';
@@ -10,7 +10,7 @@ import Modal from '../shared/ui/base_components/Modal/Modal';
 
 export function Catalog() {
   const [products, setProducts] = useState<Product[]>(staticProducts || []);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,8 +43,20 @@ export function Catalog() {
   const dispatch = useAppDispatch();
   const { user, isAuthenticated } = useAppSelector((state) => state.auth);
 
+const userCart = useAppSelector((state) => 
+    user?.id ? state.cart[user.id] : null
+  );
 
+  // Функция для подсчета количества каждого товара в корзине
+  const getProductQuantity = (productId: number): number => {
+    if (!userCart || !userCart.items) return 0;
+    return userCart.items.filter(item => item.id === productId).length;
+  };
 
+  // Проверка, есть ли товар в корзине
+  const isInCart = (productId: number): boolean => {
+    return getProductQuantity(productId) > 0;
+  };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -66,6 +78,7 @@ export function Catalog() {
     };
   }, []);
 
+  // Добавление в корзину
   const handleAddToCart = (product: Product) => {
     if (!isAuthenticated) {
       alert('Пожалуйста, войдите в систему, чтобы добавить товары в корзину');
@@ -74,7 +87,30 @@ export function Catalog() {
     
     if (user?.id && product) {
       dispatch(addToCart({ userId: user.id, product }));
-      alert(`${product.title} добавлен в корзину!`);
+    }
+  };
+
+  // Увеличение количества (добавляем еще один такой же товар)
+  const handleIncreaseQuantity = (product: Product) => {
+    if (!isAuthenticated) {
+      alert('Пожалуйста, войдите в систему');
+      return;
+    }
+    
+    if (user?.id && product) {
+      dispatch(addToCart({ userId: user.id, product }));
+    }
+  };
+
+  // Уменьшение количества (удаляем один экземпляр товара)
+  const handleDecreaseQuantity = (product: Product) => {
+    if (!isAuthenticated) {
+      alert('Пожалуйста, войдите в систему');
+      return;
+    }
+    
+    if (user?.id && product) {
+      dispatch(removeFromCart({ userId: user.id, productId: product.id }));
     }
   };
 
@@ -102,7 +138,6 @@ export function Catalog() {
     handleCloseModal();
   };
 
-  // Проверка, что products существует и является массивом
   if (!products || !Array.isArray(products)) {
     return <div className={styles.error}>Ошибка загрузки товаров</div>;
   }
@@ -119,38 +154,62 @@ export function Catalog() {
     <div className={styles.container}>
       <h1 className={styles.title}>Каталог товаров</h1>
       <div className={styles.productsGrid}>
-        {products.map((product) => (
-          <div key={product.id} className={styles.productCard}>
-          <div className={styles.imageWrapper}>
-            <img
-              src={product.image}
-              alt={product.title}
-              className={styles.productImage}
-            />
+        {products.map((product) => {
+          const quantity = getProductQuantity(product.id);
+          
+          return (
+            <div key={product.id} className={styles.productCard}>
+              <div className={styles.imageWrapper}>
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className={styles.productImage}
+                />
+              </div>
+              <div className={styles.productInfo}>
+                <h3 className={styles.productTitle}>{product.title}</h3>
+                <p className={styles.productPrice}>${product.price.toFixed(2)}</p>
+                <p className={styles.productCategory}>
+                  <strong>Категория:</strong> {product.category}
+                </p>
+              </div>
+              <div className={styles.buttonGroup}>
+                {isInCart(product.id) ? (
+                  // Показываем контролы +/-, если товар в корзине
+                  <div className={styles.quantityControls}>
+                    <button 
+                      onClick={() => handleDecreaseQuantity(product)} 
+                      className={styles.quantityBtn}
+                    >
+                      -
+                    </button>
+                    <span className={styles.quantity}>{quantity}</span>
+                    <button 
+                      onClick={() => handleIncreaseQuantity(product)} 
+                      className={styles.quantityBtn}
+                    >
+                      +
+                    </button>
+                  </div>
+                ) : (
+                  // Показываем кнопку "В корзину", если товара нет в корзине
+                  <button 
+                    onClick={() => handleAddToCart(product)} 
+                    className={styles.addToCartBtn}
+                  >
+                    В корзину
+                  </button>
+                )}
+                <button 
+                  onClick={() => handleEdit(product)} 
+                  className={styles.editBtn}
+                >
+                  Редактировать
+                </button>
+              </div>
             </div>
-            <div className={styles.productInfo}>
-              <h3 className={styles.productTitle}>{product.title}</h3>
-              <p className={styles.productPrice}>${product.price.toFixed(2)}</p>
-              <p className={styles.productCategory}>
-                <strong>Категория:</strong> {product.category}
-              </p>
-            </div>
-            <div className={styles.buttonGroup}>
-              <button 
-                onClick={() => handleAddToCart(product)} 
-                className={styles.addToCartBtn}
-              >
-                В корзину
-              </button>
-              <button 
-                onClick={() => handleEdit(product)} 
-                className={styles.editBtn}
-              >
-                Редактировать
-              </button>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
       {isModalOpen && portalRoot.current && editingProduct && createPortal(
         <Modal

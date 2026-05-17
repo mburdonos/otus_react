@@ -42,17 +42,20 @@ export function Navigation() {
       </div>
 
       <div className={styles.rightSection}>
-        <NavLink
-          to="/cart"
-          className={({ isActive }) =>
-            isActive ? styles['active-link'] : styles['nav-link']
-          }
-        >
-          <span className={styles.cartLink}>
-            cart
-            <CartBadge />
-          </span>
-        </NavLink>
+        {/* Ссылка на корзину - показываем только авторизованным */}
+        {isAuthenticated && (
+          <NavLink
+            to="/cart"
+            className={({ isActive }) =>
+              isActive ? styles['active-link'] : styles['nav-link']
+            }
+          >
+            <span className={styles.cartLink}>
+              cart
+              <CartBadge />
+            </span>
+          </NavLink>
+        )}
         
         {isAuthenticated ? (
           <>

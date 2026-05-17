@@ -56,39 +56,53 @@ const cartSlice = createSlice({
     
     // Удаление товара из корзины пользователя
     removeFromCart: (state, action: PayloadAction<{ userId: string; productId: number }>) => {
-      const { userId, productId } = action.payload;
+  const { userId, productId } = action.payload;
+  
+  if (!userId || !productId) return;
+  
+  if (state[userId] && state[userId].items.length > 0) {
+    // Находим индекс первого товара с таким id
+    const index = state[userId].items.findIndex(item => item.id === productId);
+    
+    // Если товар найден, удаляем только один экземпляр
+    if (index !== -1) {
+      state[userId].items.splice(index, 1);
+      state[userId].total = calculateTotal(state[userId].items);
       
-      if (!userId || !productId) return;
-      
-      if (state[userId]) {
-        state[userId].items = state[userId].items.filter(item => item.id !== productId);
-        state[userId].total = calculateTotal(state[userId].items);
-        
-        // Если корзина пуста, удаляем запись о пользователе
-        if (state[userId].items.length === 0) {
-          delete state[userId];
-          localStorage.removeItem(`cart_${userId}`);
-        } else {
-          localStorage.setItem(`cart_${userId}`, JSON.stringify(state[userId]));
-        }
+      // Если корзина пуста, удаляем запись о пользователе
+      if (state[userId].items.length === 0) {
+        delete state[userId];
+        localStorage.removeItem(`cart_${userId}`);
+      } else {
+        localStorage.setItem(`cart_${userId}`, JSON.stringify(state[userId]));
       }
-    },
+    }
+  }
+},
     
     // Обновление товара в корзине
-    updateProduct: (state, action: PayloadAction<{ userId: string; product: Product }>) => {
-      const { userId, product } = action.payload;
-      
-      if (!userId || !product) return;
-      
-      if (state[userId]) {
-        const index = state[userId].items.findIndex(item => item.id === product.id);
-        if (index !== -1) {
-          state[userId].items[index] = product;
-          state[userId].total = calculateTotal(state[userId].items);
-          localStorage.setItem(`cart_${userId}`, JSON.stringify(state[userId]));
-        }
+updateProduct: (state, action: PayloadAction<{ userId: string; product: Product }>) => {
+  const { userId, product } = action.payload;
+  
+  if (!userId || !product) return;
+  
+  if (state[userId] && state[userId].items.length > 0) {
+    // Обновляем ВСЕ экземпляры товара с таким id
+    let updated = false;
+    state[userId].items = state[userId].items.map(item => {
+      if (item.id === product.id) {
+        updated = true;
+        return { ...product }; // Возвращаем обновленный товар
       }
-    },
+      return item;
+    });
+    
+    if (updated) {
+      state[userId].total = calculateTotal(state[userId].items);
+      localStorage.setItem(`cart_${userId}`, JSON.stringify(state[userId]));
+    }
+  }
+},
     
     // Очистка всей корзины пользователя
     clearCart: (state, action: PayloadAction<string>) => {
